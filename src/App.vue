@@ -49,5 +49,7 @@ ul {
     margin-inline-end: 0px;
     padding-inline-start: 0px;
 }
-
+*{
+  user-select: none;
+}
 </style >
