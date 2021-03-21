@@ -1,10 +1,10 @@
 <template>
-  <div class="Test">
+  <div class="Maintenance">
     <div class="top">
       <img :src="topSrc" alt="" >
       <div class="click_div" @click="menuClick(1)"></div>
       <div class="panel" v-if="buttonOneClicked">
-        <img src="@/assets/门禁菜单.png" alt="">
+        <img src="@/assets/实时监控菜单-默认备份.png" alt="">
         <div class="item_click video_click" @click="goVideo"></div>
         <div class="item_click door_click" @click="goDoor"></div>
       </div>
@@ -25,30 +25,16 @@
       </div>
     </div>
     <div class="contain">
-      <div class="left">
-        <img src="@/assets/矩形.png" alt="">
-      </div>
-      <div class="center">
-        <bim-model ref="bimModel" @selectedEntity="selectedEntity" @clickPoint="clickPoint" :urlIp="urlIp"
-                   version="ac9900e3-4fe4-4028-8083-5ac140e73c86"></bim-model>
-      </div>
-      <div class="right">
-        <!--<img src = "@/assets/right.png" alt = "" >-->
-      </div>
+        <img src="@/assets/运维管理.png" alt="">
     </div>
   </div>
 </template>
+
 <script>
-
-import BimModel from "@/components/BimModel";
-
 export default {
-  name: 'Test',
-  components: {BimModel},
+  name: "Maintenance",
   data() {
     return {
-      // 获取模型数据接口ip
-      urlIp: 'https://ccbim.pinming.cn',
       buttonOneClicked: false,
       ziChanShow:false,
       tongJiShow:false,
@@ -71,8 +57,6 @@ export default {
       }
       return require("@/assets/nav_bar-2.png")
     }
-  },
-  mounted() {
   },
   methods: {
     menuClick(type){
@@ -126,92 +110,34 @@ export default {
     goTongJi(){
       this.$router.push('energy')
     },
-    selectedEntity(data){
-      if (data.object.handle=="508719" && data.object.floorID=="107"){
-        this.$notify.success("打开图书馆3楼过道北门")
-      }
-      if (data.object.handle=="501912" && data.object.floorID=="107"){
-        this.$notify.success("打开图书馆3楼过道南门")
-      }
-    },
-    clickPoint(r) {
-      console.log(r)
-    }
   }
+
 }
 </script>
+
 <style lang="scss" scoped>
-.Test {
+.Maintenance{
   background: #112329;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-
-  img {
-    -webkit-user-drag: none;
-  }
-
-  .top {
-    position: relative;
-
-    img {
-      width: 100%;
-    }
-
-    .click_div {
-      width: 136px;
-      height: 41px;
-      position: absolute;
-      top: 28px;
-      left: 21px;
-    }
-
-    .panel {
-      position: absolute;
-      width: 740px;
-      height: 391px;
-      z-index: 1;
-      left: 10px;
-
-      .item_click {
-        width: 219px;
-        height: 30px;
-      }
-      .video_click{
-        position: absolute;
-        bottom: 127px;
-        right: 20px;
-      }
-      .door_click{
-        position: absolute;
-        bottom: 74px;
-        left: 20px;
-      }
-    }
-  }
-
-  .contain {
-    padding-top: .5rem;
+  .contain{
     height: calc(100vh - 76px - 0.5rem);
-
-    .left {
-      margin-left: .5rem;
-
-      img {
-        margin-top: 50px;
-        width: 22.5rem;
-      }
+    overflow: auto;
+    &::-webkit-scrollbar{
+      width: 8px;
     }
-
-    display: flex;
-    justify-content: space-between;
-
-    .center {
-      width: 95rem;
-      height: 100%;
+    &::-webkit-scrollbar-thumb{
+      border-radius: 15px;
+      background: #07263E;
+    }
+    img{
+      height: 1008px;
+      width: 100%;
     }
   }
 }
+
 </style>

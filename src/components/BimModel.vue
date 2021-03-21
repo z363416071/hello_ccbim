@@ -22,25 +22,22 @@ export default {
       default: () => {
         return [];
       }
+    },
+    initPerspective:{
+      type:Object,
+      default:()=>{
+        return {
+          floorID:2,
+          handle:"351990",
+          floorName:"其他层",
+         flatBuffer:"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"
+        }
+      }
     }
   },
   data() {
     return {
       viewRender: undefined,
-      // roamData: {
-      //     hover: false,
-      //     href: "#icon-zu",
-      //     name: "漫游",
-      //     show: true,
-      //     type: "walk",
-      // },
-      // floorData: {
-      //     hover: false,
-      //     href: "#icon-floor",
-      //     name: "楼层/构件",
-      //     show: true,
-      //     type: "floor",
-      // },
       modelMarks: [], // 保存标注点的信息
       userList: [] // 这是第三方用户自己保存的标注点信息列表
     }
@@ -72,19 +69,27 @@ export default {
     this.viewRender.run(runOptions);
     this.viewRender.addEventListener('selectedEntity', (data) => {
       this.$emit("selectedEntity",data)
-     /* if (data.object.handle && data.object.clickPointPosition?.x && data.object.clickPointPosition?.y &&data.object.clickPointPosition?.z){
-        let pointData = {
-          floorId:data.object.floorID,
-          markPosition:`${data.object.handle};${data.object.clickPointPosition.x},${data.object.clickPointPosition.y},${data.object.clickPointPosition.z}`,
-          selfDefiningData:{
-            selectedEntity:data.object,
-          }
-        }
-        console.log(JSON.stringify(pointData))
-      }*/
+      // console.log(JSON.stringify(data.object))
+      /* if (data.object.handle && data.object.clickPointPosition?.x && data.object.clickPointPosition?.y &&data.object.clickPointPosition?.z){
+         let pointData = {
+           floorId:data.object.floorID,
+           markPosition:`${data.object.handle};${data.object.clickPointPosition.x},${data.object.clickPointPosition.y},${data.object.clickPointPosition.z}`,
+           selfDefiningData:{
+             selectedEntity:data.object,
+           }
+         }
+       }*/
 
     });
     this.viewRender.addEventListener('renderFinish', () => {
+      if (this.initPerspective){
+        this.viewRender.interfaceApi.setModelViewInfo(
+            this.initPerspective.floorID,
+            this.initPerspective.handle,
+            this.initPerspective.floorName,
+            this.initPerspective.flatBuffer
+        )
+      }
       if (this.positionArr && this.positionArr.length > 0) {
         let arr = this.positionArr.map(o => {
           return {

@@ -1,12 +1,27 @@
 <template>
   <div class="About">
     <div class="top">
-      <img src="@/assets/nav_bar-2.png" alt="" v-show="!buttonOneClicked">
-      <img src="@/assets/nav_bar-1.png" alt="" v-show="buttonOneClicked">
-      <div class="click_div" @click="buttonOneClicked=!buttonOneClicked"></div>
+      <img :src="topSrc" alt="" >
+      <div class="click_div" @click="menuClick(1)"></div>
       <div class="panel" v-if="buttonOneClicked">
         <img src="@/assets/实时监控菜单-默认.png" alt="">
-        <div class="item_click" @click="goVideo"></div>
+        <div class="item_click video_click" @click="goVideo"></div>
+        <div class="item_click door_click" @click="goDoor"></div>
+      </div>
+      <div class="yun_wei" @click="goMaintenance"></div>
+      <div class="zi_chan" @click="menuClick(2)"></div>
+      <div class="zichan_panel" v-if="ziChanShow">
+        <img src="@/assets/资产管理-默认.png" alt="">
+        <div class="item_click zichan_click" @click="goZiChan"></div>
+      </div>
+      <div class="tong_ji" @click="menuClick(3)"></div>
+      <div class="tongji_panel" v-if="tongJiShow">
+        <img src="@/assets/统计分析-默认.png" alt="">
+        <div class="item_click tongji_click" @click="goTongJi"></div>
+      </div>
+      <div class="xi_tong" @click="menuClick(4)"></div>
+      <div class="xitong_panel" v-if="xiTongShow">
+        <img src="@/assets/系统管理-默认.png" alt="">
       </div>
     </div>
     <div class="contain">
@@ -18,9 +33,17 @@
                    version="ac9900e3-4fe4-4028-8083-5ac140e73c86"
                    :positionArr="positionArr"></bim-model>
       </div>
-      <div class="right">
-        <!--<img src = "@/assets/right.png" alt = "" >-->
+    </div>
+    <div class="video" v-show="videoShow">
+      <div class="close_icon" @click="videoShow =false">
+        <svg t="1616223794686" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1132" width="200" height="200"><path d="M810.666667 273.493333L750.506667 213.333333 512 451.84 273.493333 213.333333 213.333333 273.493333 451.84 512 213.333333 750.506667 273.493333 810.666667 512 572.16 750.506667 810.666667 810.666667 750.506667 572.16 512z" p-id="1133"></path></svg>
       </div>
+      <video-player  class="video-player-box"
+                     ref="videoPlayer"
+                     :options="playerOptions"
+                     :playsinline="true"
+                     customEventName="customstatechangedeventname">
+      </video-player>
     </div>
   </div>
 </template>
@@ -74,7 +97,7 @@ export default {
           }
         },
         {
-          iconImg: image.normalMonitoring,
+          iconImg: image.normalMonitoring1,
           id: "2",
           "floorId": 107,
           "markPosition": "414106;153014.421743957,-72644.25314138,13063.903165566147",
@@ -110,7 +133,7 @@ export default {
           }
         },
         {
-          iconImg: image.normalMonitoring,
+          iconImg: image.normalMonitoring2,
           id: "3",
           "floorId": 107,
           "markPosition": "413101;138066.22472390378,-72644.25314138,13013.968681778757",
@@ -146,7 +169,7 @@ export default {
           }
         },
         {
-          iconImg: image.normalMonitoring,
+          iconImg: image.normalMonitoring3,
           id: "4",
           "floorId": 107,
           "markPosition": "412760;129959.20839365106,-72644.25314138,13032.634554345901",
@@ -182,7 +205,7 @@ export default {
           }
         },
         {
-          iconImg: image.normalMonitoring,
+          iconImg: image.normalMonitoring4,
           id: "5",
           "floorId": 107,
           "markPosition": "412608;122647.96585724415,-72644.25314138,13076.874742759832",
@@ -218,7 +241,7 @@ export default {
           }
         },
         {
-          iconImg: image.normalMonitoring,
+          iconImg: image.offline1,
           id: "6",
           "floorId": 107,
           "markPosition": "401132;143230.04871956873,-75402.6191717311,13099.999759253125",
@@ -254,7 +277,7 @@ export default {
           }
         },
         {
-          iconImg: image.normalMonitoring,
+          iconImg: image.offline2,
           id: "7",
           "floorId": 107,
           "markPosition": "420521;130682.27528706561,-75699.26698999468,13010.428968146693",
@@ -326,7 +349,7 @@ export default {
           }
         },
         {
-          iconImg: image.normalMonitoring,
+          iconImg: image.normalMonitoring3,
           id: "9",
           "floorId": 107,
           "markPosition": "404998;148379.68082311327,-79619.10537609181,12299.99960651623",
@@ -362,26 +385,109 @@ export default {
           }
         }
       ],
-      buttonOneClicked: false
+      buttonOneClicked: false,
+      ziChanShow:false,
+      tongJiShow:false,
+      xiTongShow:false,
+      playerOptions: {
+        // videojs options
+        fluid: true,
+        autoplay: 'muted',
+        muted: false,
+        language:  'zh',
+        sources: [{
+          withCredentials: false,
+          type: "video/mp4",
+          src: "../static/视频.mp4"
+        }],
+        controlBar: {
+          timeDivider: false,
+          durationDisplay: false,
+          remainingTimeDisplay : false,//
+        },
+        loop: true,
+        preload: 'auto',
+      },
+      videoShow:false
+    }
+  },
+  computed:{
+    topSrc(){
+      if (this.buttonOneClicked ){
+        return require("@/assets/nav_bar-1.png")
+      }
+      if (this.ziChanShow ){
+        return require("@/assets/nav bar-资产管理选中.png")
+      }
+      if (this.tongJiShow ){
+        return require("@/assets/nav bar-统计分析选中.png")
+      }
+      if (this.xiTongShow ){
+        return require("@/assets/nav bar-系统管理选中.png")
+      }
+      return require("@/assets/nav_bar-2.png")
     }
   },
   mounted() {
   },
   methods: {
+    menuClick(type){
+      switch (type){
+        case 1:
+          this.buttonOneClicked = !this.buttonOneClicked;
+          this.ziChanShow = false;
+          this.tongJiShow = false;
+          this.xiTongShow = false;
+          break;
+        case 2:
+          this.buttonOneClicked = false;
+          this.ziChanShow = !this.ziChanShow;
+          this.tongJiShow = false;
+          this.xiTongShow = false;
+          break;
+        case 3:
+          this.buttonOneClicked = false;
+          this.ziChanShow = false;
+          this.tongJiShow = !this.tongJiShow;
+          this.xiTongShow = false;
+          break;
+        case 4:
+          this.buttonOneClicked = false;
+          this.ziChanShow = false;
+          this.tongJiShow = false;
+          this.xiTongShow = !this.xiTongShow;
+          break;
+        default:
+          this.buttonOneClicked = false;
+          this.ziChanShow = false;
+          this.tongJiShow = false;
+          this.xiTongShow = false;
+          break;
+      }
+    },
     goVideo() {
       this.buttonOneClicked = !this.buttonOneClicked;
       this.$router.push('about')
     },
+    goDoor() {
+      this.buttonOneClicked = !this.buttonOneClicked;
+      this.$router.push('test')
+    },
+    goMaintenance(){
+      this.$router.push('maintenance')
+    },
+    goZiChan(){
+      this.$router.push('assets')
+    },
+    goTongJi(){
+      this.$router.push('energy')
+    },
     selectedEntity(data){
-      if (data.object.handle=="508719" && data.object.floorID=="107"){
-        console.log("打开图书馆3楼过道北门")
-      }
-      if (data.object.handle=="501912" && data.object.floorID=="107"){
-        console.log("打开图书馆3楼过道南门")
-      }
+      console.log(data)
     },
     clickPoint(r) {
       console.log(r)
+      this.videoShow =true;
     }
   }
 }
@@ -399,37 +505,6 @@ export default {
     -webkit-user-drag: none;
   }
 
-  .top {
-    position: relative;
-
-    img {
-      width: 100%;
-    }
-
-    .click_div {
-      width: 136px;
-      height: 41px;
-      position: absolute;
-      top: 28px;
-      left: 21px;
-    }
-
-    .panel {
-      position: absolute;
-      width: 740px;
-      height: 391px;
-      z-index: 1;
-      left: 10px;
-
-      .item_click {
-        width: 219px;
-        height: 30px;
-        position: absolute;
-        bottom: 127px;
-        right: 20px;
-      }
-    }
-  }
 
   .contain {
     padding-top: .5rem;
@@ -450,6 +525,45 @@ export default {
     .center {
       width: 95rem;
       height: 100%;
+    }
+  }
+  .video{
+    position: absolute;
+    height: 219px;
+    width: 380px;
+    top: 96px;
+    left: 419px;
+    .close_icon{
+      font-size: 10px;
+      position: absolute;
+      z-index: 2;
+      right: 0;
+      svg{
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .video-player-box{
+      /deep/ .video-js{
+        .vjs-control-bar{
+          display: flex;
+          justify-content: space-between;
+        }
+        .vjs-paused{
+          display: none;
+        }
+        .vjs-icon-placeholder {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+        .vjs-playing{
+          display: none;
+        }
+        .vjs-progress-control{
+          display: none;
+        }
+      }
     }
   }
 }
