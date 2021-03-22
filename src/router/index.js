@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import store from "@/store/index"
 Vue.use(VueRouter)
 
 const routes = [
@@ -57,5 +57,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  store.commit("setModelShow",false)
+  next()
+})
 export default router

@@ -29,9 +29,7 @@
       <div class="left">
         <img src="@/assets/left.png" alt="">
       </div>
-      <div class="center">
-        <bim-model :urlIp="urlIp" version="ac9900e3-4fe4-4028-8083-5ac140e73c86"></bim-model>
-      </div>
+     
       <div class="right">
         <img src="@/assets/right.png" alt="">
       </div>
@@ -41,11 +39,12 @@
 
 <script>
 
-import BimModel from "@/components/BimModel";
+
+import model from "@/mixins/model";
 
 export default {
   name: 'Home',
-  components: {BimModel},
+  components: {},
   data() {
     return {
       // 获取模型数据接口ip
@@ -57,6 +56,7 @@ export default {
       xiTongShow:false,
     }
   },
+  mixins:[model],
   computed:{
     topSrc(){
       if (this.buttonOneClicked ){
@@ -75,6 +75,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit("setModelShow",true);
   },
   methods: {
     menuClick(type){
@@ -113,20 +114,20 @@ export default {
     },
     goVideo() {
       this.buttonOneClicked = !this.buttonOneClicked;
-      this.$router.push('about')
+      this.$router.push('about');
     },
     goDoor() {
       this.buttonOneClicked = !this.buttonOneClicked;
-      this.$router.push('test')
+      this.$router.push('test');
     },
     goMaintenance(){
-      this.$router.push('maintenance')
+      this.$router.push('maintenance');
     },
     goZiChan(){
-      this.$router.push('assets')
+      this.$router.push('assets');
     },
     goTongJi(){
-      this.$router.push('energy')
+      this.$router.push('energy');
     },
 
   }

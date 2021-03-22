@@ -58,6 +58,8 @@ export default {
       return require("@/assets/nav_bar-2.png")
     }
   },
+  mounted() {
+  },
   methods: {
     menuClick(type){
       switch (type){

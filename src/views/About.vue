@@ -28,11 +28,11 @@
       <div class="left">
         <img src="@/assets/视频监控面板.png" alt="">
       </div>
-      <div class="center">
-        <bim-model ref="bimModel" @selectedEntity="selectedEntity" @clickPoint="clickPoint" :urlIp="urlIp"
-                   version="ac9900e3-4fe4-4028-8083-5ac140e73c86"
-                   :positionArr="positionArr"></bim-model>
-      </div>
+      <!--<div class="center">-->
+      <!--  <bim-model ref="bimModel" @selectedEntity="selectedEntity" @clickPoint="clickPoint" :urlIp="urlIp"-->
+      <!--             version="ac9900e3-4fe4-4028-8083-5ac140e73c86"-->
+      <!--             :positionArr="positionArr"></bim-model>-->
+      <!--</div>-->
     </div>
     <div class="video" v-show="videoShow">
       <div class="close_icon" @click="videoShow =false">
@@ -41,20 +41,18 @@
       <video-player  class="video-player-box"
                      ref="videoPlayer"
                      :options="playerOptions"
-                     :playsinline="true"
-                     customEventName="customstatechangedeventname">
+                     :playsinline="true" >
       </video-player>
     </div>
   </div>
 </template>
 <script>
 
-import BimModel from "@/components/BimModel";
 import image from "@/global/config"
 
 export default {
   name: 'About',
-  components: {BimModel},
+  components: {},
   data() {
     return {
       // 获取模型数据接口ip

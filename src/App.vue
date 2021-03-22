@@ -1,10 +1,18 @@
 <template >
   <div id = "app" >
     <router-view />
+    <bim-model ref = "bimModel" urlIp = "https://ccbim.pinming.cn"
+               version = "ac9900e3-4fe4-4028-8083-5ac140e73c86" ></bim-model >
   </div >
 </template >
 
 <style lang = "scss" >
+#bimModel {
+  height: 100vh;
+  width: 100vw;
+}
+
+
 html {
   height: 100%;
   width: 100%;
