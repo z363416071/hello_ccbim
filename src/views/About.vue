@@ -27,12 +27,10 @@
     <div class="contain">
       <div class="left">
         <img src="@/assets/视频监控面板.png" alt="">
+        <div class="videos">
+          <div class="video_item" v-for="(o,index) of videoList" @click="clickVideo(o.selfDefiningData.selectedEntity)" :key="index"></div>
+        </div>
       </div>
-      <!--<div class="center">-->
-      <!--  <bim-model ref="bimModel" @selectedEntity="selectedEntity" @clickPoint="clickPoint" :urlIp="urlIp"-->
-      <!--             version="ac9900e3-4fe4-4028-8083-5ac140e73c86"-->
-      <!--             :positionArr="positionArr"></bim-model>-->
-      <!--</div>-->
     </div>
     <div class="video" v-show="videoShow">
       <div class="close_icon" @click="videoShow =false">
@@ -49,6 +47,7 @@
 <script>
 
 import image from "@/global/config"
+import model from "@/mixins/model";
 
 export default {
   name: 'About',
@@ -409,6 +408,7 @@ export default {
       videoShow:false
     }
   },
+  mixins:[model],
   computed:{
     topSrc(){
       if (this.buttonOneClicked ){
@@ -424,11 +424,35 @@ export default {
         return require("@/assets/nav bar-系统管理选中.png")
       }
       return require("@/assets/nav_bar-2.png")
+    },
+    videoList(){
+      return this.positionArr.filter((o,index)=>index<6)
     }
   },
+  created() {
+    this.width = 1558;
+  },
   mounted() {
+    this.$store.commit("setModelShow",true);
   },
   methods: {
+    inint(){
+      let arr  = this.positionArr.map(o=>{
+        return {
+          ...o,
+          clickPointCallback: (r) => {
+            this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
+                r.data.selectedEntity.floorID,
+                r.data.selectedEntity.handle,
+                r.data.selectedEntity.floorName,
+                r.data.selectedEntity.flatBuffer
+            );
+            this.videoShow =true;
+          }
+        }
+      });
+      this.$store.state.modelVueInstance.viewRender.interfaceApi.setMarkPointList(arr);
+    },
     menuClick(type){
       switch (type){
         case 1:
@@ -480,13 +504,15 @@ export default {
     goTongJi(){
       this.$router.push('energy')
     },
-    selectedEntity(data){
-      console.log(data)
+    clickVideo(r){
+      this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
+          r.floorID,
+          r.handle,
+          r.floorName,
+          r.flatBuffer
+      );
     },
-    clickPoint(r) {
-      console.log(r)
-      this.videoShow =true;
-    }
+   
   }
 }
 </script>
@@ -515,6 +541,14 @@ export default {
         margin-top: 50px;
         width: 22.5rem;
       }
+      .videos{
+        width: 359px;
+        position: absolute;
+        top: 566px;
+        .video_item{
+          height: 30px;
+        }
+      }
     }
 
     display: flex;
@@ -531,6 +565,7 @@ export default {
     width: 380px;
     top: 96px;
     left: 419px;
+    z-index: 2;
     .close_icon{
       font-size: 10px;
       position: absolute;

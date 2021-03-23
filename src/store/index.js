@@ -5,19 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        viewRender: undefined,
         modelShow:false,
-        renderFinished:false
+        renderFinished:false,
+        modelVueInstance:undefined,
     },
     mutations: {
-        setViewRender(state, v) {
-            state.viewRender = v;
-        },
         setModelShow(state, v) {
             state.modelShow = v;
         },
-        setRenderFinished(state, v) {
-            state.renderFinished = v;
+        setModelVueInstance(state, v) {
+            state.modelVueInstance = v;
         },
     },
     actions: {},

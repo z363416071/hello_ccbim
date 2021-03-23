@@ -10,14 +10,17 @@ export default {
     mounted() {
         let initFuc=()=>{
             this.$root.$emit("resetBimModel",this.width,this.height,this.top,this.left);
-    
-        }
-        if (this.$store.state.renderFinished){
+            if (this.inint)this.inint()
+        };
+        if (this.$store.state.modelVueInstance.renderFinished){
+            console.log(this.width)
             initFuc();
         }
         this.$root.$on("renderFinish",()=>{
             initFuc();
         })
+    },
+    methods: {
     },
     beforeDestroy() {
         this.$root.$off("renderFinish")

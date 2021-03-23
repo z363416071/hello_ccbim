@@ -1,7 +1,7 @@
 <template >
   <div class = "BimModel" :style = "{'width':width,'height':height,'left':left,'top':top}" v-show = "modelShow" >
     <div id = "bimView" style = "position: relative;" :style = "{'width':width,'height':height}" ></div >
-    <div class = "ccbim__viewHome" v-show = "$store.state.renderFinished" @click = "goHome" >
+    <div class = "ccbim__viewHome" v-show = "renderFinished" @click = "goHome" >
       <svg title = "默认视口" class = "icon" aria-hidden = "true" >
         <use xlink:href = "#iconhome-" ></use >
       </svg >
@@ -10,6 +10,7 @@
 </template >
 
 <script >
+
 export default {
   name: "BimModel",
   components: {},
@@ -36,7 +37,8 @@ export default {
       width: "1167px",
       height: "897px",
       top: "72px",
-      left:  "378px",
+      left: "378px",
+      renderFinished: false,
     }
   },
   computed: {
@@ -45,6 +47,7 @@ export default {
     }
   },
   created() {
+    this.$store.commit("setModelVueInstance", this);
   },
   mounted() {
     let modelElement = document.getElementById('bimView');
@@ -58,7 +61,6 @@ export default {
       viewBoxVisible: true, // 是否显示视口viewBox盒（可不传，默认显示）
     }
     this.viewRender = new window.$CCBIM$.ViewRender(modelElement, options);
-    this.$store.commit("setViewRender", this.viewRender);
     // run参数，可不传(注意这里的参数会影响操作栏中的设置功能，所以没值的话最好不要传相关的字段)
     const runOptions = {
       bgColor: { // 背景色
@@ -85,7 +87,7 @@ export default {
     });
     this.viewRender.addEventListener('renderFinish', () => {
       this.$root.$emit("renderFinish");
-      this.$store.commit("setRenderFinished",true)
+      this.renderFinished = true;
       this.goHome();
     });
     this.$root.$on("resetBimModel", (width, height, top, left) => {
@@ -99,7 +101,7 @@ export default {
   },
   methods: {
     goHome() {
-      if (this.$store.state.renderFinished) {
+      if (this.renderFinished) {
         this.viewRender.interfaceApi.setModelViewInfo(
             this.initPerspective.floorID,
             this.initPerspective.handle,
@@ -107,8 +109,14 @@ export default {
             this.initPerspective.flatBuffer
         )
       }
-      
+    },
+    setInit() {
+      this.viewRender.interfaceApi.setMarkPointList([]);
+      this.viewRender.interfaceApi.clearAllHighlightEntity();
+      this.viewRender.interfaceApi.closeBarAllOperation();
+      this.goHome();
     }
+    
   },
   destroyed() {
     this.viewRender.interfaceApi.dispose();
@@ -120,7 +128,6 @@ export default {
 <style lang = "scss" scoped >
 .BimModel {
   position: absolute;
-  z-index: 1;
   
   /deep/ #bimView {
     .ccbim__viewHome {

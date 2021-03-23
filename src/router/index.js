@@ -58,6 +58,9 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
+  if (store.state.modelVueInstance){
+    store.state.modelVueInstance.setInit()
+  }
   store.commit("setModelShow",false)
   next()
 })
