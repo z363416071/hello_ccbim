@@ -1,56 +1,63 @@
-<template>
-  <div class="About">
-    <div class="top">
-      <img src="@/assets/nav bar-实时监控.png" alt="" >
-      <div class="click_home" @click="menuClick(0)"></div>
-      <div class="click_div" @click="menuClick(1)"></div>
-      <monitor-panel v-if="buttonOneClicked">
-      </monitor-panel>
-      <div class="yun_wei" @click="goMaintenance"></div>
-      <div class="zi_chan" @click="menuClick(2)"></div>
-      <div class="zichan_panel" v-if="ziChanShow">
-        <img src="@/assets/资产管理-默认.png" alt="">
-        <div class="item_click zichan_click" @click="goZiChan"></div>
-      </div>
-      <div class="tong_ji" @click="menuClick(3)"></div>
-      <div class="tongji_panel" v-if="tongJiShow">
-        <img src="@/assets/统计分析-默认.png" alt="">
-        <div class="item_click tongji_click" @click="goTongJi"></div>
-      </div>
-      <div class="xi_tong" @click="menuClick(4)"></div>
-      <div class="xitong_panel" v-if="xiTongShow">
-        <img src="@/assets/系统管理-默认.png" alt="">
-      </div>
-    </div>
-    <div class="contain">
-      <div class="left">
-        <img src="@/assets/视频监控面板.png" alt="">
-        <div class="videos">
-          <div class="video_item" v-for="(o,index) of videoList" @click="clickVideo(o.selfDefiningData.selectedEntity)" :key="index"></div>
-        </div>
-      </div>
-    </div>
-    <div class="video" v-show="videoShow">
-      <div class="close_icon" @click="videoShow =false">
-        <svg t="1616223794686" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1132" width="200" height="200"><path d="M810.666667 273.493333L750.506667 213.333333 512 451.84 273.493333 213.333333 213.333333 273.493333 451.84 512 213.333333 750.506667 273.493333 810.666667 512 572.16 750.506667 810.666667 810.666667 750.506667 572.16 512z" p-id="1133"></path></svg>
-      </div>
-      <video-player  class="video-player-box"
-                     ref="videoPlayer"
-                     :options="playerOptions"
-                     :playsinline="true" >
-      </video-player>
-    </div>
-  </div>
-</template>
-<script>
+<template >
+  <div class = "About" >
+    <div class = "top" >
+      <img src = "@/assets/nav bar-实时监控.png" alt = "" >
+      <div class = "click_home" @click = "menuClick(0)" ></div >
+      <div class = "click_div" @click = "menuClick(1)" ></div >
+      <monitor-panel v-if = "buttonOneClicked" >
+      </monitor-panel >
+      <div class = "yun_wei" @click = "menuClick(5)" ></div >
+      <maintenance-panel v-show = "yunWeiShow" ></maintenance-panel >
+      <div class = "zi_chan" @click = "menuClick(2)" ></div >
+      <div class = "zichan_panel" v-if = "ziChanShow" >
+        <img src = "@/assets/资产管理-默认.png" alt = "" >
+        <div class = "item_click zichan_click" @click = "goZiChan" ></div >
+      </div >
+      <div class = "tong_ji" @click = "menuClick(3)" ></div >
+      <div class = "tongji_panel" v-if = "tongJiShow" >
+        <img src = "@/assets/统计分析-默认.png" alt = "" >
+        <div class = "item_click tongji_click" @click = "goTongJi" ></div >
+      </div >
+      <div class = "xi_tong" @click = "menuClick(4)" ></div >
+      <div class = "xitong_panel" v-if = "xiTongShow" >
+        <img src = "@/assets/系统管理-默认.png" alt = "" >
+      </div >
+    </div >
+    <div class = "contain" >
+      <div class = "left" >
+        <img src = "@/assets/视频监控面板.png" alt = "" >
+        <div class = "videos" >
+          <div class = "video_item" v-for = "(o,index) of videoList" @click = "clickVideo(o.selfDefiningData.selectedEntity)" :key = "index" ></div >
+        </div >
+      </div >
+    </div >
+    <div class = "video" v-show = "videoShow" >
+      <div class = "close_icon" @click = "videoShow =false" >
+        <svg t = "1616223794686" class = "icon" viewBox = "0 0 1024 1024" version = "1.1" xmlns = "http://www.w3.org/2000/svg" p-id = "1132"
+             width = "200" height = "200" >
+          <path
+              d = "M810.666667 273.493333L750.506667 213.333333 512 451.84 273.493333 213.333333 213.333333 273.493333 451.84 512 213.333333 750.506667 273.493333 810.666667 512 572.16 750.506667 810.666667 810.666667 750.506667 572.16 512z"
+              p-id = "1133" ></path >
+        </svg >
+      </div >
+      <video-player class = "video-player-box"
+                    ref = "videoPlayer"
+                    :options = "playerOptions"
+                    :playsinline = "true" >
+      </video-player >
+    </div >
+  </div >
+</template >
+<script >
 
 import image from "@/global/config"
 import model from "@/mixins/model";
 import MonitorPanel from "@/components/MonitorPanel";
+import MaintenancePanel from "@/components/MaintenancePanel";
 
 export default {
   name: 'About',
-  components: {MonitorPanel},
+  components: {MaintenancePanel, MonitorPanel},
   data() {
     return {
       // 获取模型数据接口ip
@@ -382,15 +389,16 @@ export default {
         }
       ],
       buttonOneClicked: false,
-      ziChanShow:false,
-      tongJiShow:false,
-      xiTongShow:false,
+      ziChanShow: false,
+      tongJiShow: false,
+      xiTongShow: false,
+      yunWeiShow: false,
       playerOptions: {
         // videojs options
         fluid: true,
         autoplay: 'muted',
         muted: false,
-        language:  'zh',
+        language: 'zh',
         sources: [{
           withCredentials: false,
           type: "video/mp4",
@@ -399,29 +407,29 @@ export default {
         controlBar: {
           timeDivider: false,
           durationDisplay: false,
-          remainingTimeDisplay : false,//
+          remainingTimeDisplay: false,//
         },
         loop: true,
         preload: 'auto',
       },
-      videoShow:false
+      videoShow: false
     }
   },
-  mixins:[model],
-  computed:{
-    videoList(){
-      return this.positionArr.filter((o,index)=>index<6)
+  mixins: [model],
+  computed: {
+    videoList() {
+      return this.positionArr.filter((o, index) => index < 6)
     }
   },
   created() {
     this.width = 1558;
   },
   mounted() {
-    this.$store.commit("setModelShow",true);
+    this.$store.commit("setModelShow", true);
   },
   methods: {
-    inint(){
-      let arr  = this.positionArr.map(o=>{
+    inint() {
+      let arr = this.positionArr.map(o => {
         return {
           ...o,
           clickPointCallback: (r) => {
@@ -431,17 +439,17 @@ export default {
                 r.data.selectedEntity.floorName,
                 r.data.selectedEntity.flatBuffer
             );
-            this.videoShow =true;
+            this.videoShow = true;
           }
         }
       });
       this.$store.state.modelVueInstance.viewRender.interfaceApi.setMarkPointList(arr);
     },
-    menuClick(type){
-      switch (type){
+    menuClick(type) {
+      switch (type) {
         case 0:
-           this.$router.push({
-            path:"/"
+          this.$router.push({
+            path: "/"
           });
           break;
         case 1:
@@ -449,44 +457,56 @@ export default {
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
         case 2:
           this.buttonOneClicked = false;
           this.ziChanShow = !this.ziChanShow;
           this.tongJiShow = false;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
         case 3:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = !this.tongJiShow;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
         case 4:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = !this.xiTongShow;
+          this.yunWeiShow =false;
+          break;
+        case 5:
+          this.buttonOneClicked = false;
+          this.ziChanShow = false;
+          this.tongJiShow = false;
+          this.xiTongShow = false;
+          this.yunWeiShow = !this.yunWeiShow;
           break;
         default:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
       }
     },
-  
-    goMaintenance(){
+    
+    goMaintenance() {
       this.$router.push('maintenance')
     },
-    goZiChan(){
+    goZiChan() {
       this.$router.push('assets')
     },
-    goTongJi(){
+    goTongJi() {
       this.$router.push('energy')
     },
-    clickVideo(r){
+    clickVideo(r) {
       this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
           r.floorID,
           r.handle,
@@ -494,11 +514,11 @@ export default {
           r.flatBuffer
       );
     },
-   
+    
   }
 }
-</script>
-<style lang="scss" scoped>
+</script >
+<style lang = "scss" scoped >
 .About {
   background: #112329;
   position: absolute;
@@ -506,80 +526,90 @@ export default {
   right: 0;
   left: 0;
   bottom: 0;
-
+  
   img {
     -webkit-user-drag: none;
   }
-
-
+  
+  
   .contain {
     padding-top: .5rem;
     height: calc(100vh - 76px - 0.5rem);
-
+    
     .left {
       margin-left: .5rem;
-
+      
       img {
         margin-top: 50px;
         width: 22.5rem;
       }
-      .videos{
+      
+      .videos {
         width: 359px;
         position: absolute;
         top: 566px;
-        .video_item{
+        
+        .video_item {
           height: 30px;
         }
       }
     }
-
+    
     display: flex;
     justify-content: space-between;
-
+    
     .center {
       width: 95rem;
       height: 100%;
     }
   }
-  .video{
+  
+  .video {
     position: absolute;
     height: 219px;
     width: 380px;
     top: 96px;
     left: 419px;
     z-index: 2;
-    .close_icon{
+    
+    .close_icon {
       font-size: 10px;
       position: absolute;
       z-index: 2;
       right: 0;
-      svg{
+      
+      svg {
         width: 30px;
         height: 30px;
       }
     }
-    .video-player-box{
-      /deep/ .video-js{
-        .vjs-control-bar{
+    
+    .video-player-box {
+      /deep/ .video-js {
+        .vjs-control-bar {
           display: flex;
           justify-content: space-between;
         }
-        .vjs-paused{
+        
+        .vjs-paused {
           display: none;
         }
+        
         .vjs-icon-placeholder {
           width: 100%;
           height: 100%;
           display: block;
         }
-        .vjs-playing{
+        
+        .vjs-playing {
           display: none;
         }
-        .vjs-progress-control{
+        
+        .vjs-progress-control {
           display: none;
         }
       }
     }
   }
 }
-</style>
+</style >

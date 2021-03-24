@@ -5,7 +5,8 @@
       <div class="click_home" @click="menuClick(0)"></div>
       <div class="click_div" @click="menuClick(1)"></div>
       <monitor-panel v-if="buttonOneClicked"></monitor-panel>
-      <div class="yun_wei" @click="goMaintenance"></div>
+      <div class = "yun_wei" @click = "menuClick(5)" ></div >
+      <maintenance-panel v-show = "yunWeiShow" ></maintenance-panel >
       <div class="zi_chan" @click="menuClick(2)"></div>
       <div class="zichan_panel" v-if="ziChanShow">
         <img src="@/assets/资产管理-默认.png" alt="">
@@ -37,10 +38,11 @@
 
 import model from "@/mixins/model";
 import MonitorPanel from "@/components/MonitorPanel";
+import MaintenancePanel from "@/components/MaintenancePanel";
 
 export default {
   name: 'Test',
-  components: {MonitorPanel},
+  components: {MaintenancePanel, MonitorPanel},
   data() {
     return {
       // 获取模型数据接口ip
@@ -49,6 +51,7 @@ export default {
       ziChanShow:false,
       tongJiShow:false,
       xiTongShow:false,
+      yunWeiShow: false,
       doorAlarmList:[
         {
           "clickPointPosition":{
@@ -247,11 +250,11 @@ export default {
           r.flatBuffer
       );
     },
-    menuClick(type){
-      switch (type){
+    menuClick(type) {
+      switch (type) {
         case 0:
-           this.$router.push({
-            path:"/"
+          this.$router.push({
+            path: "/"
           });
           break;
         case 1:
@@ -259,34 +262,46 @@ export default {
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
         case 2:
           this.buttonOneClicked = false;
           this.ziChanShow = !this.ziChanShow;
           this.tongJiShow = false;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
         case 3:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = !this.tongJiShow;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
         case 4:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = !this.xiTongShow;
+          this.yunWeiShow =false;
+          break;
+        case 5:
+          this.buttonOneClicked = false;
+          this.ziChanShow = false;
+          this.tongJiShow = false;
+          this.xiTongShow = false;
+          this.yunWeiShow = !this.yunWeiShow;
           break;
         default:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = false;
+          this.yunWeiShow =false;
           break;
       }
     },
-    
+  
     goMaintenance(){
       this.$router.push('maintenance')
     },

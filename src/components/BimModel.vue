@@ -224,10 +224,6 @@ export default {
         display: none;
       }
       
-      .ccbim__operation__icon:nth-child(2) {
-        display: none;
-      }
-      
       .ccbim__operation__icon:nth-child(3) {
         display: none;
       }
