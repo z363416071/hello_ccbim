@@ -1,5 +1,5 @@
 <template >
-  <div class = "MaintenancePanel" >
+  <div class = "EnergyPanel" >
     <div class = "item" v-for = "(o,index) of clickList" :key = "index" @click = "goRouter(o.router)" :class = "$route.name === o.router?'current_item':''" >
       <img :src = "o.icon" alt = "" >
       {{ o.name }}
@@ -9,35 +9,19 @@
 
 <script >
 export default {
-  name: "MaintenancePanel",
+  name: "EnergyPanel",
   components: {},
   data() {
     return {
       clickList: [
         {
-          name: "报修",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份.png")
+          name: "故障统计",
+          icon: require("@/assets/assets_panel/icon／20／关闭摄像备份 6.png"),
         },
         {
-          name: "告警管理",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 38.png")
-        },
-        {
-          name: "巡检管理",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 39.png")
-        },
-        {
-          name: "问题库",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 40.png")
-        },
-        {
-          name: "服务商管理",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 40.png")
-        },
-        {
-          name: "运维分析",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 41.png"),
-          router:"Maintenance"
+          name: "能耗统计",
+          icon: require("@/assets/assets_panel/icon／20／关闭摄像备份 42.png"),
+          router:"Energy"
         },
       ]
     }
@@ -59,19 +43,19 @@ export default {
 </script >
 
 <style lang = "scss" scoped >
-.MaintenancePanel {
-  height: 106px;
-  width: 720px;
+.EnergyPanel {
   background: rgba(13, 39, 59, 0.9);
   box-shadow: 0px 4px 8px 0px rgba(21, 48, 73, 0.4);
   border: 1px solid #254C63;
   position: absolute;
-  left: 615px;
   padding: 10px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   z-index: 4;
+  width: 480px;
+  height: 52px;
+  right: 470px;
   .current_item{
     background: url("~@/assets/按钮边框-选中.png")!important;
   }

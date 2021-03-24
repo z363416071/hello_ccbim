@@ -1,5 +1,5 @@
 <template >
-  <div class = "MaintenancePanel" >
+  <div class = "SystemPanel" >
     <div class = "item" v-for = "(o,index) of clickList" :key = "index" @click = "goRouter(o.router)" :class = "$route.name === o.router?'current_item':''" >
       <img :src = "o.icon" alt = "" >
       {{ o.name }}
@@ -9,36 +9,48 @@
 
 <script >
 export default {
-  name: "MaintenancePanel",
+  name: "SystemPanel",
   components: {},
   data() {
     return {
       clickList: [
         {
-          name: "报修",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份.png")
+          name: "人员管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 11.png"),
         },
         {
-          name: "告警管理",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 38.png")
+          name: "角色管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 46.png")
         },
         {
-          name: "巡检管理",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 39.png")
+          name: "部门管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 47.png")
         },
         {
-          name: "问题库",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 40.png")
+          name: "数据字典",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 48.png")
         },
         {
-          name: "服务商管理",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 40.png")
+          name: "消息管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 49.png")
         },
         {
-          name: "运维分析",
-          icon: require("@/assets/maintenance_panel/icon／20／关闭摄像备份 41.png"),
-          router:"Maintenance"
+          name: "密码管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 50.png")
         },
+        {
+          name: "文件管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 51.png")
+        },
+        {
+          name: "日志管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 52.png")
+        },
+        {
+          name: "位置管理",
+          icon: require("@/assets/system_panel/icon／20／关闭摄像备份 53.png")
+        },
+
       ]
     }
   },
@@ -59,19 +71,19 @@ export default {
 </script >
 
 <style lang = "scss" scoped >
-.MaintenancePanel {
-  height: 106px;
-  width: 720px;
+.SystemPanel {
   background: rgba(13, 39, 59, 0.9);
   box-shadow: 0px 4px 8px 0px rgba(21, 48, 73, 0.4);
   border: 1px solid #254C63;
   position: absolute;
-  left: 615px;
   padding: 10px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   z-index: 4;
+  width: 720px;
+  height: 158px;
+  right: 316px;
   .current_item{
     background: url("~@/assets/按钮边框-选中.png")!important;
   }
@@ -85,14 +97,14 @@ export default {
     font-size: 14px;
     display: flex;
     align-items: center;
-    
+
     img {
       width: 16px;
       height: 16px;
       margin-left: 10px;
       margin-right: 10px;
     }
-    
+
     &:hover {
       background: url("~@/assets/按钮边框-选中.png");
     }

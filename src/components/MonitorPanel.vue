@@ -16,7 +16,8 @@ export default {
       clickList: [
         {
           name: "多媒体教学系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像.png"),
+          router: "Computer"
         },
         {
           name: "校园智能卡应用系统",
@@ -36,7 +37,8 @@ export default {
         },
         {
           name: "无线电话对讲系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 24.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 24.png"),
+          router: "Intercom"
         },
         {
           name: "信息网络系统",
@@ -113,7 +115,7 @@ export default {
 
 <style lang = "scss" scoped >
 .MonitorPanel {
-  height: 391px;
+  height: 369px;
   width: 720px;
   background: rgba(13, 39, 59, 0.9);
   box-shadow: 0px 4px 8px 0px rgba(21, 48, 73, 0.4);
@@ -124,7 +126,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  z-index: 1;
+  z-index: 4;
   .current_item{
     background: url("~@/assets/按钮边框-选中.png")!important;
   }

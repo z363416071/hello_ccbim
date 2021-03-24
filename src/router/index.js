@@ -50,6 +50,16 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Energy.vue')
   },
+  {
+    path: '/computer',
+    name: 'Computer',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Computer.vue')
+  },
+  {
+    path: '/intercom',
+    name: 'Intercom',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Intercom.vue')
+  },
 ]
 
 const router = new VueRouter({

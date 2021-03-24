@@ -9,19 +9,11 @@
       <div class = "yun_wei" @click = "menuClick(5)" ></div >
       <maintenance-panel v-show = "yunWeiShow" ></maintenance-panel >
       <div class="zi_chan" @click="menuClick(2)"></div>
-      <div class="zichan_panel" v-if="ziChanShow">
-        <img src="@/assets/资产管理-默认.png" alt="">
-        <div class="item_click zichan_click" @click="goZiChan"></div>
-      </div>
+      <assets-panel v-show = "ziChanShow" ></assets-panel>
       <div class="tong_ji" @click="menuClick(3)"></div>
-      <div class="tongji_panel" v-if="tongJiShow">
-        <img src="@/assets/统计分析-默认.png" alt="">
-        <div class="item_click tongji_click" @click="goTongJi"></div>
-      </div>
+      <energy-panel v-if="tongJiShow"></energy-panel>
       <div class="xi_tong" @click="menuClick(4)"></div>
-      <div class="xitong_panel" v-if="xiTongShow">
-        <img src="@/assets/系统管理-默认.png" alt="">
-      </div>
+      <system-panel v-if = "xiTongShow" ></system-panel>
     </div>
     <div class="contain">
         <img src="@/assets/运维管理.png" alt="">
@@ -32,9 +24,13 @@
 <script>
 import MonitorPanel from "@/components/MonitorPanel";
 import MaintenancePanel from "@/components/MaintenancePanel";
+import AssetsPanel from "@/components/AssetsPanel";
+import EnergyPanel from "@/components/EnergyPanel";
+import SystemPanel from "@/components/SystemPanel";
 export default {
   name: "Maintenance",
-  components: {MaintenancePanel, MonitorPanel},
+  components: {SystemPanel, EnergyPanel, AssetsPanel, MaintenancePanel, MonitorPanel},
+
   data() {
     return {
       buttonOneClicked: false,
@@ -98,16 +94,7 @@ export default {
           break;
       }
     },
-  
-    goMaintenance(){
-      this.$router.push('maintenance')
-    },
-    goZiChan(){
-      this.$router.push('assets')
-    },
-    goTongJi(){
-      this.$router.push('energy')
-    },
+
   }
 
 }

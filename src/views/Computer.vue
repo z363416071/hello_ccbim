@@ -1,63 +1,46 @@
 <template>
-  <div class="home">
+  <div class="Computer">
     <div class="top">
-      <img src="@/assets/nav bar-首页.png" alt="" >
+      <img src="@/assets/nav bar-实时监控.png" alt="" >
       <div class="click_home" @click="menuClick(0)"></div>
       <div class="click_div" @click="menuClick(1)"></div>
-      <monitor-panel v-if="buttonOneClicked"></monitor-panel>
+      <monitor-panel v-if="buttonOneClicked">
+      </monitor-panel>
       <div class = "yun_wei" @click = "menuClick(5)" ></div >
       <maintenance-panel v-show = "yunWeiShow" ></maintenance-panel >
-      <div class = "zi_chan" @click = "menuClick(2)" ></div >
-      <assets-panel v-if = "ziChanShow"></assets-panel>
+      <div class="zi_chan" @click="menuClick(2)"></div>
+      <assets-panel v-show = "ziChanShow" ></assets-panel>
       <div class="tong_ji" @click="menuClick(3)"></div>
       <energy-panel v-if="tongJiShow"></energy-panel>
       <div class="xi_tong" @click="menuClick(4)"></div>
       <system-panel v-if = "xiTongShow" ></system-panel>
     </div>
     <div class="contain">
-      <img class="zi_xi_tong" src="@/assets/子系统.png" alt="">
-      <div class="left">
-        <img src="@/assets/left.png" alt="">
-      </div>
-     
-      <div class="right">
-        <img src="@/assets/right.png" alt="">
-      </div>
+        <img src="@/assets/计算机网络系统.png" alt="">
     </div>
   </div>
 </template>
 
 <script>
-
-
-import model from "@/mixins/model";
 import MonitorPanel from "@/components/MonitorPanel";
 import MaintenancePanel from "@/components/MaintenancePanel";
 import AssetsPanel from "@/components/AssetsPanel";
 import EnergyPanel from "@/components/EnergyPanel";
 import SystemPanel from "@/components/SystemPanel";
-
 export default {
-  name: 'Home',
+  name: "Computer",
   components: {SystemPanel, EnergyPanel, AssetsPanel, MaintenancePanel, MonitorPanel},
 
   data() {
     return {
-      // 获取模型数据接口ip
-      urlIp: 'https://ccbim.pinming.cn',
-      userList: [],
       buttonOneClicked: false,
       ziChanShow:false,
       tongJiShow:false,
-      yunWeiShow: false,
       xiTongShow:false,
+      yunWeiShow: false,
     }
   },
-  mixins:[model],
   computed:{
-  },
-  mounted() {
-    this.$store.commit("setModelShow",true);
   },
   methods: {
     menuClick(type) {
@@ -111,57 +94,34 @@ export default {
           break;
       }
     },
-  
-  
-
 
   }
+
 }
 </script>
+
 <style lang="scss" scoped>
-.home {
+.Computer{
   background: #112329;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-
-
-  .contain {
-    padding-top: .5rem;
+  .contain{
     height: calc(100vh - 76px - 0.5rem);
-    position: relative;
-    .zi_xi_tong{
-      position: absolute;
-      left:  25.5rem;
-      z-index: 3;
+    overflow: auto;
+    &::-webkit-scrollbar{
+      width: 8px;
     }
-    .left {
-      margin-left: .5rem;
-
-      img {
-        width: 22.5rem;
-        height: 100%;
-      }
+    &::-webkit-scrollbar-thumb{
+      border-radius: 15px;
+      background: #07263E;
     }
-
-    .right {
-      margin-right: .5rem;
-
-      img {
-        width: 22.3rem;
-        height: 100%;
-      }
-    }
-
-    display: flex;
-    justify-content: space-between;
-
-    .center {
-      width: 73rem;
-      height: 100%;
+    img{
+      width: 100%;
     }
   }
 }
+
 </style>

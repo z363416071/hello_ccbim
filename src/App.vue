@@ -123,31 +123,6 @@ img {
     }
   }
   
-  .panel {
-    position: absolute;
-    width: 740px;
-    height: 391px;
-    z-index: 10;
-    left: 464px;
-    
-    .item_click {
-      width: 219px;
-      height: 30px;
-    }
-    
-    .video_click {
-      position: absolute;
-      bottom: 127px;
-      right: 20px;
-    }
-    
-    .door_click {
-      position: absolute;
-      bottom: 74px;
-      left: 20px;
-    }
-  }
-  
   .tong_ji {
     width: 136px;
     height: 41px;
@@ -162,19 +137,19 @@ img {
     height: 74px;
     z-index: 10;
     right: 470px;
-    
+
     .item_click {
       width: 219px;
       height: 30px;
     }
-    
+
     .tongji_click {
       position: absolute;
       bottom: 22px;
       right: 20px;
     }
   }
-  
+
   .xi_tong {
     width: 136px;
     height: 41px;
