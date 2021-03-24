@@ -13,7 +13,6 @@ export default {
             if (this.inint)this.inint()
         };
         if (this.$store.state.modelVueInstance.renderFinished){
-            console.log(this.width)
             initFuc();
         }
         this.$root.$on("renderFinish",()=>{

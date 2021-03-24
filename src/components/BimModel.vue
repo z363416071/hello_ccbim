@@ -73,7 +73,6 @@ export default {
     this.viewRender.run(runOptions);
     this.viewRender.addEventListener('selectedEntity', (data) => {
       this.$root.$emit("selectedEntity", data)
-      console.log(JSON.stringify(data.object))
       /* if (data.object.handle && data.objectw.clickPointPosition?.x && data.object.clickPointPosition?.y &&data.object.clickPointPosition?.z){
          let pointData = {
            floorId:data.object.floorID,
@@ -133,7 +132,9 @@ export default {
     .ccbim__viewHome {
       display: none;
     }
-    
+    .ccbim__roam__topRightMap{
+      z-index: 1;
+    }
     .ccbim__modelTree.ccbim__common__dialog {
       background-color: rgba(13, 39, 59, 0.9);
       color: rgba(255, 255, 255, .45);

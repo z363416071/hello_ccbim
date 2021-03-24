@@ -73,13 +73,19 @@ img {
   img {
     width: 100%;
   }
-  
+  .click_home{
+    width: 136px;
+    height: 41px;
+    position: absolute;
+    top: 28px;
+    left: 318px;
+  }
   .click_div {
     width: 136px;
     height: 41px;
     position: absolute;
     top: 28px;
-    left: 21px;
+    left: 469px;
   }
   
   .yun_wei {
@@ -87,7 +93,7 @@ img {
     height: 41px;
     position: absolute;
     top: 28px;
-    left: 158px;
+    left: 618px;
   }
   
   .zi_chan {
@@ -95,7 +101,7 @@ img {
     height: 41px;
     position: absolute;
     top: 28px;
-    left: 301px;
+    right: 619px;
   }
   
   .zichan_panel {
@@ -103,7 +109,7 @@ img {
     width: 740px;
     height: 131px;
     z-index: 10;
-    left: 302px;
+    right: 620px;
     
     .item_click {
       width: 219px;
@@ -122,7 +128,7 @@ img {
     width: 740px;
     height: 391px;
     z-index: 10;
-    left: 10px;
+    left: 464px;
     
     .item_click {
       width: 219px;
@@ -147,7 +153,7 @@ img {
     height: 41px;
     position: absolute;
     top: 28px;
-    left: 438px;
+    right: 470px;
   }
   
   .tongji_panel {
@@ -155,7 +161,7 @@ img {
     width: 501px;
     height: 74px;
     z-index: 10;
-    left: 445px;
+    right: 470px;
     
     .item_click {
       width: 219px;
@@ -174,7 +180,7 @@ img {
     height: 41px;
     position: absolute;
     top: 28px;
-    left: 577px;
+    right: 320px;
   }
   
   .xitong_panel {
@@ -182,7 +188,7 @@ img {
     width: 740px;
     height: 180px;
     z-index: 10;
-    left: 584px;
+    right: 323px;
   }
 }
 </style >

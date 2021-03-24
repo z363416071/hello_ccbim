@@ -1,13 +1,11 @@
 <template>
   <div class="About">
     <div class="top">
-      <img :src="topSrc" alt="" >
+      <img src="@/assets/nav bar-实时监控.png" alt="" >
+      <div class="click_home" @click="menuClick(0)"></div>
       <div class="click_div" @click="menuClick(1)"></div>
-      <div class="panel" v-if="buttonOneClicked">
-        <img src="@/assets/实时监控菜单-默认.png" alt="">
-        <div class="item_click video_click" @click="goVideo"></div>
-        <div class="item_click door_click" @click="goDoor"></div>
-      </div>
+      <monitor-panel v-if="buttonOneClicked">
+      </monitor-panel>
       <div class="yun_wei" @click="goMaintenance"></div>
       <div class="zi_chan" @click="menuClick(2)"></div>
       <div class="zichan_panel" v-if="ziChanShow">
@@ -48,10 +46,11 @@
 
 import image from "@/global/config"
 import model from "@/mixins/model";
+import MonitorPanel from "@/components/MonitorPanel";
 
 export default {
   name: 'About',
-  components: {},
+  components: {MonitorPanel},
   data() {
     return {
       // 获取模型数据接口ip
@@ -395,7 +394,7 @@ export default {
         sources: [{
           withCredentials: false,
           type: "video/mp4",
-          src: "../static/视频.mp4"
+          src: require("@/assets/视频1-迅捷压缩.mp4")
         }],
         controlBar: {
           timeDivider: false,
@@ -410,21 +409,6 @@ export default {
   },
   mixins:[model],
   computed:{
-    topSrc(){
-      if (this.buttonOneClicked ){
-        return require("@/assets/nav_bar-1.png")
-      }
-      if (this.ziChanShow ){
-        return require("@/assets/nav bar-资产管理选中.png")
-      }
-      if (this.tongJiShow ){
-        return require("@/assets/nav bar-统计分析选中.png")
-      }
-      if (this.xiTongShow ){
-        return require("@/assets/nav bar-系统管理选中.png")
-      }
-      return require("@/assets/nav_bar-2.png")
-    },
     videoList(){
       return this.positionArr.filter((o,index)=>index<6)
     }
@@ -455,6 +439,11 @@ export default {
     },
     menuClick(type){
       switch (type){
+        case 0:
+           this.$router.push({
+            path:"/"
+          });
+          break;
         case 1:
           this.buttonOneClicked = !this.buttonOneClicked;
           this.ziChanShow = false;
@@ -487,14 +476,7 @@ export default {
           break;
       }
     },
-    goVideo() {
-      this.buttonOneClicked = !this.buttonOneClicked;
-      this.$router.push('about')
-    },
-    goDoor() {
-      this.buttonOneClicked = !this.buttonOneClicked;
-      this.$router.push('test')
-    },
+  
     goMaintenance(){
       this.$router.push('maintenance')
     },
