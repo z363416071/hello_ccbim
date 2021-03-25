@@ -6,8 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         modelShow:false,
-        renderFinished:false,
         modelVueInstance:undefined,
+        initDeviceData:undefined
     },
     mutations: {
         setModelShow(state, v) {
@@ -15,6 +15,9 @@ export default new Vuex.Store({
         },
         setModelVueInstance(state, v) {
             state.modelVueInstance = v;
+        },
+        setInitDeviceData(state, v) {
+            state.initDeviceData = v;
         },
     },
     actions: {},

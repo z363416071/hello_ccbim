@@ -16,13 +16,13 @@
       <system-panel v-if = "xiTongShow" ></system-panel >
     </div >
     <div class = "contain" >
-      <div class = "item_click" style="left: 20px;" @click="showPage('空调监控系统')"></div >
-      <div class = "item_click" style="left: 137px;" @click="showPage('送排风系统')"></div >
-      <div class = "item_click" style="left: 257px;" @click="showPage('冷源系统')"></div >
-      <div class = "item_click" style="left: 367px;" @click="showPage('电梯系统')"></div >
-      <div class = "item_click" style="left: 479px;" @click="showPage('智能照明系统')"></div >
-      <div class = "item_click" style="left: 600px;" @click="showPage('水环境监测')"></div >
-      <div class = "item_click" style="left: 717px;" @click="showPage('能耗计量系统')"></div >
+      <div class = "item_click" style = "left: 20px;" @click = "showPage('空调监控系统')" ></div >
+      <div class = "item_click" style = "left: 137px;" @click = "showPage('送排风系统')" ></div >
+      <div class = "item_click" style = "left: 257px;" @click = "showPage('冷源系统')" ></div >
+      <div class = "item_click" style = "left: 367px;" @click = "showPage('电梯系统')" ></div >
+      <div class = "item_click" style = "left: 479px;" @click = "showPage('智能照明系统')" ></div >
+      <div class = "item_click" style = "left: 600px;" @click = "showPage('水环境监测')" ></div >
+      <div class = "item_click" style = "left: 717px;" @click = "showPage('能耗计量系统')" ></div >
       <img :src = "img" alt = "" >
     </div >
   </div >
@@ -46,7 +46,7 @@ export default {
       tongJiShow: false,
       xiTongShow: false,
       yunWeiShow: false,
-      img:require("@/assets/空调监控系统.png")
+      img: require("@/assets/空调监控系统.png")
     }
   },
   computed: {},
@@ -102,7 +102,7 @@ export default {
           break;
       }
     },
-    showPage(name){
+    showPage(name) {
       this.img = require(`@/assets/${name}.png`)
     }
   }

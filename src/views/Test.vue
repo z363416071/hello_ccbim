@@ -238,6 +238,17 @@ export default {
     })
   },
   methods: {
+    init() {
+      if (this.$store.state.initDeviceData?.floorID){
+        this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
+            this.$store.state.initDeviceData.floorID,
+            this.$store.state.initDeviceData.handle,
+            this.$store.state.initDeviceData.floorName,
+            this.$store.state.initDeviceData.flatBuffer
+        );
+        this.$store.commit("setInitDeviceData",undefined)
+      }
+    },
     clickDoorAlarm(r){
       this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
           r.floorID,

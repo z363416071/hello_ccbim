@@ -22,6 +22,7 @@
           <div class = "video_item" v-for = "(o,index) of videoList" @click = "clickVideo(o.selfDefiningData.selectedEntity)" :key = "index" ></div >
         </div >
       </div >
+      
     </div >
     <div class = "video" v-show = "videoShow" >
       <div class = "close_icon" @click = "videoShow =false" >
@@ -38,6 +39,9 @@
                     :playsinline = "true" >
       </video-player >
     </div >
+    <div class = "pop_info" v-show="popInfo">
+      <div class = "close" @click="popInfo =false;"></div >
+    </div >
   </div >
 </template >
 <script >
@@ -53,7 +57,6 @@ import SystemPanel from "@/components/SystemPanel";
 export default {
   name: 'About',
   components: {SystemPanel, EnergyPanel, AssetsPanel, MaintenancePanel, MonitorPanel},
-
   data() {
     return {
       // 获取模型数据接口ip
@@ -394,11 +397,11 @@ export default {
         fluid: true,
         autoplay: 'muted',
         muted: false,
-        language: 'zh',
+        language: 'zh-CN',
         sources: [{
           withCredentials: false,
           type: "video/mp4",
-          src: require("@/assets/视频1-迅捷压缩.mp4")
+          src: ""
         }],
         controlBar: {
           timeDivider: false,
@@ -408,7 +411,8 @@ export default {
         loop: true,
         preload: 'auto',
       },
-      videoShow: false
+      videoShow: false,
+      popInfo:false,
     }
   },
   mixins: [model],
@@ -424,7 +428,7 @@ export default {
     this.$store.commit("setModelShow", true);
   },
   methods: {
-    inint() {
+    init() {
       let arr = this.positionArr.map(o => {
         return {
           ...o,
@@ -435,11 +439,25 @@ export default {
                 r.data.selectedEntity.floorName,
                 r.data.selectedEntity.flatBuffer
             );
+            this.playerOptions.sources[0].src = require("@/assets/视频1-迅捷压缩.mp4");
             this.videoShow = true;
+            this.popInfo = true;
           }
         }
       });
       this.$store.state.modelVueInstance.viewRender.interfaceApi.setMarkPointList(arr);
+      if (this.$store.state.initDeviceData?.floorID){
+        this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
+            this.$store.state.initDeviceData.floorID,
+            this.$store.state.initDeviceData.handle,
+            this.$store.state.initDeviceData.floorName,
+            this.$store.state.initDeviceData.flatBuffer
+        );
+        this.playerOptions.sources[0].src = this.$store.state.initDeviceData.src;
+        this.videoShow = true;
+        this.popInfo = true;
+        this.$store.commit("setInitDeviceData",undefined)
+      }
     },
     menuClick(type) {
       switch (type) {
@@ -492,7 +510,6 @@ export default {
           break;
       }
     },
-    
 
     clickVideo(r) {
       this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
@@ -514,7 +531,23 @@ export default {
   right: 0;
   left: 0;
   bottom: 0;
-  
+  .pop_info {
+    position: absolute;
+    top: 300px;
+    left: 1332px;
+    width: 384px;
+    height: 257px;
+    background: url("~@/assets/摄像头1.png");
+    z-index: 1;
+    
+    .close {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 15px;
+      right: 10px;
+    }
+  }
   img {
     -webkit-user-drag: none;
   }

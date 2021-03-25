@@ -10,7 +10,7 @@ export default {
     mounted() {
         let initFuc=()=>{
             this.$root.$emit("resetBimModel",this.width,this.height,this.top,this.left);
-            if (this.inint)this.inint()
+            if (this.init)this.init()
         };
         if (this.$store.state.modelVueInstance.renderFinished){
             initFuc();
