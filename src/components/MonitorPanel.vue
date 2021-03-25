@@ -21,7 +21,8 @@ export default {
         },
         {
           name: "校园智能卡应用系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 20.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 20.png"),
+          router:"Card"
         },
         {
           name: "智能化信息集成(平台)系统",
@@ -50,11 +51,13 @@ export default {
         },
         {
           name: "多媒体会议系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 27.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 27.png"),
+          router:"MultiMedia"
         },
         {
           name: "信息导引及发布系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 28.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 28.png"),
+          router:"Information"
         },
         {
           name: "综合管网系统",
@@ -70,7 +73,8 @@ export default {
         },
         {
           name: "入侵报警系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 32.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 32.png"),
+          router: "Burglarproof"
         },
         {
           name: "视频安防监测系统",
@@ -84,11 +88,13 @@ export default {
         },
         {
           name: "电子巡查系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 35.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 35.png"),
+          router:"ElectronicInspection"
         },
         {
           name: "停车场管理系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 36.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 36.png"),
+          router: "Parking"
         },
         {
           name: "机房系统工程",

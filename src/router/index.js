@@ -60,6 +60,35 @@ const routes = [
     name: 'Intercom',
     component: () => import(/* webpackChunkName: "about" */ '../views/Intercom.vue')
   },
+  {
+    path: '/multimedia',
+    name: 'MultiMedia',
+    component: () => import(/* webpackChunkName: "about" */ '../views/MultiMedia.vue')
+  },{
+    path: '/parking',
+    name: 'Parking',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Parking.vue')
+  },
+  {
+    path: '/ElectronicInspection',
+    name: 'ElectronicInspection',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ElectronicInspection.vue')
+  },
+  {
+    path: '/information',
+    name: 'Information',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Information.vue')
+  },
+  {
+    path: '/burglarproof',
+    name: 'Burglarproof',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Burglarproof.vue')
+  },
+  {
+    path: '/card',
+    name: 'Card',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Card.vue')
+  },
 ]
 
 const router = new VueRouter({
