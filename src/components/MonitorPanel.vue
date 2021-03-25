@@ -1,6 +1,7 @@
 <template >
   <div class = "MonitorPanel" >
-    <div class = "item" v-for = "(o,index) of clickList" :key = "index" @click = "goRouter(o.router)" :class = "$route.name === o.router?'current_item':''" >
+    <div class = "item" v-for = "(o,index) of clickList" :key = "index" @click = "goRouter(o.router)"
+         :class = "{'current_item':$route.name === o.router,'pointer':o.router}" >
       <img :src = "o.icon" alt = "" >
       {{ o.name }}
     </div >
@@ -22,7 +23,7 @@ export default {
         {
           name: "校园智能卡应用系统",
           icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 20.png"),
-          router:"Card"
+          router: "Card"
         },
         {
           name: "智能化信息集成(平台)系统",
@@ -52,12 +53,12 @@ export default {
         {
           name: "多媒体会议系统",
           icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 27.png"),
-          router:"MultiMedia"
+          router: "MultiMedia"
         },
         {
           name: "信息导引及发布系统",
           icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 28.png"),
-          router:"Information"
+          router: "Information"
         },
         {
           name: "综合管网系统",
@@ -70,7 +71,7 @@ export default {
         {
           name: "建筑能效监管系统",
           icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 31.png"),
-          router:"Building"
+          router: "Building"
         },
         {
           name: "入侵报警系统",
@@ -90,7 +91,7 @@ export default {
         {
           name: "电子巡查系统",
           icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 35.png"),
-          router:"ElectronicInspection"
+          router: "ElectronicInspection"
         },
         {
           name: "停车场管理系统",
@@ -112,7 +113,7 @@ export default {
   methods: {
     goRouter(name) {
       name && this.$router.push({
-        name:name
+        name: name
       });
     }
   },
@@ -134,8 +135,12 @@ export default {
   justify-content: flex-start;
   flex-wrap: wrap;
   z-index: 4;
-  .current_item{
-    background: url("~@/assets/按钮边框-选中.png")!important;
+  
+  .current_item {
+    background: url("~@/assets/按钮边框-选中.png") !important;
+  }
+  .pointer{
+    cursor: pointer;
   }
   .item {
     width: 220px;

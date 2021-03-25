@@ -4,16 +4,16 @@
       <img src = "@/assets/nav bar-实时监控.png" alt = "" >
       <div class = "click_home" @click = "menuClick(0)" ></div >
       <div class = "click_div" @click = "menuClick(1)" ></div >
-      <monitor-panel v-if = "buttonOneClicked" >
+      <monitor-panel v-show = "buttonOneClicked" >
       </monitor-panel >
       <div class = "yun_wei" @click = "menuClick(5)" ></div >
       <maintenance-panel v-show = "yunWeiShow" ></maintenance-panel >
       <div class = "zi_chan" @click = "menuClick(2)" ></div >
-      <assets-panel v-if = "ziChanShow"></assets-panel>
-      <div class="tong_ji" @click="menuClick(3)"></div>
-      <energy-panel v-if="tongJiShow"></energy-panel>
+      <assets-panel v-show = "ziChanShow" ></assets-panel >
+      <div class = "tong_ji" @click = "menuClick(3)" ></div >
+      <energy-panel v-show = "tongJiShow" ></energy-panel >
       <div class = "xi_tong" @click = "menuClick(4)" ></div >
-      <system-panel v-if = "xiTongShow" ></system-panel>
+      <system-panel v-show = "xiTongShow" ></system-panel >
     </div >
     <div class = "contain" >
       <div class = "left" >
@@ -22,7 +22,7 @@
           <div class = "video_item" v-for = "(o,index) of videoList" @click = "clickVideo(o.selfDefiningData.selectedEntity)" :key = "index" ></div >
         </div >
       </div >
-      
+    
     </div >
     <div class = "video" v-show = "videoShow" >
       <div class = "close_icon" @click = "videoShow =false" >
@@ -39,8 +39,8 @@
                     :playsinline = "true" >
       </video-player >
     </div >
-    <div class = "pop_info" v-show="popInfo">
-      <div class = "close" @click="popInfo =false;"></div >
+    <div class = "pop_info" v-show = "popInfo" :class = "type===1?'pop_info1':'pop_info2'" >
+      <div class = "close" @click = "popInfo =false;" ></div >
     </div >
   </div >
 </template >
@@ -94,9 +94,11 @@ export default {
                 "y": -40310.98276062791,
                 "z": -33613.94872671895
               },
-              "flatBuffer": "EAAAAAwAFAAQAAwACAAEAAwAAAAAAAAADAAAAAwAAABQBgAAAAAAAIIAAAAsBgAAGAYAAAwGAAD4BQAA7AUAAOAFAADUBQAAyAUAALwFAACwBQAApAUAAJgFAACMBQAAgAUAAHQFAABoBQAAXAUAAFAFAABEBQAAOAUAACwFAAAgBQAAFAUAAAgFAAD8BAAA8AQAAOQEAADYBAAAzAQAAMAEAAC0BAAAqAQAAJwEAACQBAAAhAQAAHgEAABsBAAAYAQAAFQEAABIBAAAPAQAADAEAAAkBAAAGAQAAAwEAAAABAAA9AMAAOgDAADcAwAA0AMAAMQDAAC4AwAArAMAAKADAACUAwAAiAMAAHwDAABwAwAAZAMAAFgDAABMAwAAQAMAADQDAAAoAwAAHAMAABADAAAEAwAA+AIAAOwCAADgAgAA1AIAAMgCAAC8AgAAsAIAAKQCAACYAgAAjAIAAIACAAB0AgAAaAIAAFwCAABQAgAARAIAADgCAAAsAgAAIAIAABQCAAAIAgAA/AEAAOwBAADYAQAAzAEAAMABAAC0AQAAqAEAAJwBAACQAQAAhAEAAHgBAABsAQAAYAEAAFQBAABIAQAAPAEAADABAAAkAQAAGAEAAAwBAAAAAQAA9AAAAOgAAADcAAAA0AAAAMQAAAC4AAAArAAAAKAAAACUAAAAiAAAAHwAAABwAAAAZAAAAFgAAABMAAAAQAAAADQAAAAoAAAAHAAAABAAAAAEAAAA+vv//54AAAAC/P//mgAAAAr8//+ZAAAAEvz//5gAAAAa/P//lgAAACL8//+VAAAAKvz//5QAAAAy/P//kwAAADr8//+SAAAAQvz//5EAAABK/P//kAAAAFL8//+PAAAAWvz//44AAABi/P//jAAAAGr8//+LAAAAcvz//4oAAAB6/P//iQAAAIL8//+IAAAAivz//4cAAACS/P//hgAAAJr8//+FAAAAovz//4QAAACq/P//gwAAALL8//+CAAAAuvz//4AAAADC/P//fwAAAMr8//9+AAAA0vz//30AAADa/P//fAAAAOL8//97AAAA6vz//3cAAADy/P//dgAAAPr8//91AAAAAv3//3QAAAAK/f//cwAAABL9//9yAAAAGv3//3EAAAAi/f//cAAAACr9//9vAAAAMv3//2wAAAAIAAwACAAHAAgAAAAAAAABawAAAE79//9qAAAAVv3//2kAAABe/f//aAAAAGb9//9nAAAAbv3//2UAAAB2/f//ZAAAAH79//9jAAAAhv3//2IAAACO/f//YAAAAJb9//9fAAAAnv3//14AAACm/f//XQAAAK79//9cAAAAtv3//1sAAAC+/f//WgAAAMb9//9ZAAAAzv3//1gAAADW/f//VwAAAN79//9WAAAA5v3//1UAAADu/f//VAAAAPb9//9TAAAA/v3//1EAAAAG/v//UAAAAA7+//9PAAAAFv7//04AAAAe/v//TQAAACb+//9LAAAALv7//0oAAAA2/v//SQAAAD7+//9GAAAARv7//0QAAABO/v//QwAAAFb+//9CAAAAXv7//0EAAABm/v//QAAAAG7+//8/AAAAdv7//z4AAAB+/v//PQAAAIb+//88AAAAjv7//zoAAACW/v//OAAAAJ7+//83AAAApv7//zYAAACu/v//NQAAALb+//80AAAAvv7//zMAAADG/v//MgAAAM7+//8wAAAA1v7//y8AAADe/v//LgAAAOb+//8tAAAA7v7//ywAAAD2/v//KwAAAP7+//8pAAAABv///ygAAAAO////JwAAABb///8mAAAAHv///yUAAAAm////JAAAAC7///8jAAAANv///yIAAAA+////IQAAAEb///8fAAAATv///x0AAABW////HAAAAF7///8bAAAAZv///xoAAABu////GQAAAHb///8YAAAAfv///xcAAACG////FgAAAI7///8VAAAAlv///xQAAACe////EwAAAKb///8SAAAArv///xEAAAC2////EAAAAL7///8OAAAAxv///wwAAADO////CwAAANb///8KAAAA3v///wgAAADm////BwAAAO7///8GAAAA3v///wUAAAAAAAYACAAEAAYAAAAEAAAA9v///wMAAAAAAAYACgAEAAYAAAABAAAAAAAOADAAJAAYAAwACAAEAA4AAAAAAMB/AADAf9fy+r5Mgas+rgFOP6pXx0f8dh3H800Dx0cIJkg3cKnHGsbTRg=="
-            }
-          }
+              "flatBuffer": "EAAAAAwAFAAQAAwACAAEAAwAAAAAAAAADAAAACQAAADUBgAABgAAAIQCAABoAgAAWAIAADwCAAAsAgAAEAIAAIIAAACYBgAAhAYAAHgGAABkBgAAWAYAAEwGAABABgAANAYAACgGAAAcBgAAEAYAAAQGAAD4BQAA7AUAAOAFAADUBQAAyAUAALwFAACwBQAApAUAAJgFAACMBQAAgAUAAHQFAABoBQAAXAUAAFAFAABEBQAAOAUAACwFAAAgBQAAFAUAAAgFAAD8BAAA8AQAAOQEAADYBAAAzAQAAMAEAAC0BAAAqAQAAJwEAACQBAAAhAQAAHgEAABsBAAAYAQAAFQEAABIBAAAPAQAADAEAAAkBAAAGAQAAAwEAAAABAAA9AMAAOgDAADcAwAA0AMAAMQDAAC4AwAArAMAAKADAACUAwAAiAMAAHwDAABwAwAAZAMAAFgDAABMAwAAQAMAADQDAAAoAwAAHAMAABADAAAEAwAA+AIAAOwCAADgAgAA1AIAAMgCAAC8AgAAsAIAAKQCAACYAgAAjAIAAIACAAB0AgAAaAIAAFgCAABEAgAAOAIAACwCAAAgAgAAFAIAAAgCAAD8AQAA8AEAAOQBAADYAQAAzAEAAMABAAC0AQAAqAEAAJwBAACQAQAAhAEAAHgBAABsAQAAYAEAAFQBAABIAQAAPAEAADABAAAkAQAAGAEAAAwBAAAAAQAA9AAAAOgAAADcAAAA0AAAAMQAAAC4AAAArAAAAKAAAACUAAAAiAAAAHwAAABwAAAA9P///37RVUcAAIC/DAAMAAAAAAAIAAQADAAAAAAAFkUAAIA/9P///zCJ0kgAAIC/DAAMAAAACAAAAAQADAAAAO8hz0gAAIA/9P///57P7UgAAIC/DAAMAAgAAAAAAAQADAAAAO9ln0gAAIA/+vv//54AAAAC/P//mgAAAAr8//+ZAAAAEvz//5gAAAAa/P//lgAAACL8//+VAAAAKvz//5QAAAAy/P//kwAAADr8//+SAAAAQvz//5EAAABK/P//kAAAAFL8//+PAAAAWvz//44AAABi/P//jAAAAGr8//+LAAAAcvz//4oAAAB6/P//iQAAAIL8//+IAAAAivz//4cAAACS/P//hgAAAJr8//+FAAAAovz//4QAAACq/P//gwAAALL8//+CAAAAuvz//4AAAADC/P//fwAAAMr8//9+AAAA0vz//30AAADa/P//fAAAAOL8//97AAAA6vz//3cAAADy/P//dgAAAPr8//91AAAAAv3//3QAAAAK/f//cwAAABL9//9yAAAAGv3//3EAAAAi/f//cAAAACr9//9vAAAAMv3//2wAAAAIAAwACAAHAAgAAAAAAAABawAAAE79//9qAAAAVv3//2kAAABe/f//aAAAAGb9//9nAAAAbv3//2UAAAB2/f//ZAAAAH79//9jAAAAhv3//2IAAACO/f//YAAAAJb9//9fAAAAnv3//14AAACm/f//XQAAAK79//9cAAAAtv3//1sAAAC+/f//WgAAAMb9//9ZAAAAzv3//1gAAADW/f//VwAAAN79//9WAAAA5v3//1UAAADu/f//VAAAAPb9//9TAAAA/v3//1EAAAAG/v//UAAAAA7+//9PAAAAFv7//04AAAAe/v//TQAAACb+//9LAAAALv7//0oAAAA2/v//SQAAAD7+//9GAAAARv7//0QAAABO/v//QwAAAFb+//9CAAAAXv7//0EAAABm/v//QAAAAG7+//8/AAAAdv7//z4AAAB+/v//PQAAAIb+//88AAAAjv7//zoAAACW/v//OAAAAJ7+//83AAAApv7//zYAAACu/v//NQAAALb+//80AAAAvv7//zMAAADG/v//MgAAAM7+//8wAAAA1v7//y8AAADe/v//LgAAAOb+//8tAAAA7v7//ywAAAD2/v//KwAAAP7+//8pAAAABv///ygAAAAO////JwAAABb///8mAAAAHv///yUAAAAm////JAAAAC7///8jAAAANv///yIAAAA+////IQAAAEb///8fAAAATv///x0AAABW////HAAAAF7///8bAAAAZv///xoAAABu////GQAAAHb///8YAAAAfv///xcAAACG////FgAAAI7///8VAAAAlv///xQAAACe////EwAAAKb///8SAAAArv///xEAAAC2////EAAAAL7///8OAAAAxv///wwAAADO////CwAAANb///8KAAAA3v///wgAAADm////BwAAAO7///8GAAAA3v///wUAAAAAAAYACAAEAAYAAAAEAAAA9v///wMAAAAAAAYACgAEAAYAAAABAAAAAAAOADAAJAAYAAwACAAEAA4AAAAAAMB/AADAfyjTI76JlcI+BTlpPzyH4EfsytlFX/XQxuGRE0hbIJrHHRRxRg=="
+            },
+            type: 1,
+          },
+          
         },
         {
           iconImg: image.normalMonitoring1,
@@ -203,7 +205,8 @@ export default {
                 "z": -33613.94921875
               },
               "flatBuffer": "EAAAAAwAFAAQAAwACAAEAAwAAAAAAAAADAAAACQAAADUBgAABgAAAIQCAABoAgAAWAIAADwCAAAsAgAAEAIAAIIAAACYBgAAhAYAAHgGAABkBgAAWAYAAEwGAABABgAANAYAACgGAAAcBgAAEAYAAAQGAAD4BQAA7AUAAOAFAADUBQAAyAUAALwFAACwBQAApAUAAJgFAACMBQAAgAUAAHQFAABoBQAAXAUAAFAFAABEBQAAOAUAACwFAAAgBQAAFAUAAAgFAAD8BAAA8AQAAOQEAADYBAAAzAQAAMAEAAC0BAAAqAQAAJwEAACQBAAAhAQAAHgEAABsBAAAYAQAAFQEAABIBAAAPAQAADAEAAAkBAAAGAQAAAwEAAAABAAA9AMAAOgDAADcAwAA0AMAAMQDAAC4AwAArAMAAKADAACUAwAAiAMAAHwDAABwAwAAZAMAAFgDAABMAwAAQAMAADQDAAAoAwAAHAMAABADAAAEAwAA+AIAAOwCAADgAgAA1AIAAMgCAAC8AgAAsAIAAKQCAACYAgAAjAIAAIACAAB0AgAAaAIAAFgCAABEAgAAOAIAACwCAAAgAgAAFAIAAAgCAAD8AQAA8AEAAOQBAADYAQAAzAEAAMABAAC0AQAAqAEAAJwBAACQAQAAhAEAAHgBAABsAQAAYAEAAFQBAABIAQAAPAEAADABAAAkAQAAGAEAAAwBAAAAAQAA9AAAAOgAAADcAAAA0AAAAMQAAAC4AAAArAAAAKAAAACUAAAAiAAAAHwAAABwAAAA9P///37RVUcAAIC/DAAMAAAAAAAIAAQADAAAAAAAFkUAAIA/9P///zCJ0kgAAIC/DAAMAAAACAAAAAQADAAAAO8hz0gAAIA/9P///57P7UgAAIC/DAAMAAgAAAAAAAQADAAAAO9ln0gAAIA/+vv//54AAAAC/P//mgAAAAr8//+ZAAAAEvz//5gAAAAa/P//lgAAACL8//+VAAAAKvz//5QAAAAy/P//kwAAADr8//+SAAAAQvz//5EAAABK/P//kAAAAFL8//+PAAAAWvz//44AAABi/P//jAAAAGr8//+LAAAAcvz//4oAAAB6/P//iQAAAIL8//+IAAAAivz//4cAAACS/P//hgAAAJr8//+FAAAAovz//4QAAACq/P//gwAAALL8//+CAAAAuvz//4AAAADC/P//fwAAAMr8//9+AAAA0vz//30AAADa/P//fAAAAOL8//97AAAA6vz//3cAAADy/P//dgAAAPr8//91AAAAAv3//3QAAAAK/f//cwAAABL9//9yAAAAGv3//3EAAAAi/f//cAAAACr9//9vAAAAMv3//2wAAAAIAAwACAAHAAgAAAAAAAABawAAAE79//9qAAAAVv3//2kAAABe/f//aAAAAGb9//9nAAAAbv3//2UAAAB2/f//ZAAAAH79//9jAAAAhv3//2IAAACO/f//YAAAAJb9//9fAAAAnv3//14AAACm/f//XQAAAK79//9cAAAAtv3//1sAAAC+/f//WgAAAMb9//9ZAAAAzv3//1gAAADW/f//VwAAAN79//9WAAAA5v3//1UAAADu/f//VAAAAPb9//9TAAAA/v3//1EAAAAG/v//UAAAAA7+//9PAAAAFv7//04AAAAe/v//TQAAACb+//9LAAAALv7//0oAAAA2/v//SQAAAD7+//9GAAAARv7//0QAAABO/v//QwAAAFb+//9CAAAAXv7//0EAAABm/v//QAAAAG7+//8/AAAAdv7//z4AAAB+/v//PQAAAIb+//88AAAAjv7//zoAAACW/v//OAAAAJ7+//83AAAApv7//zYAAACu/v//NQAAALb+//80AAAAvv7//zMAAADG/v//MgAAAM7+//8wAAAA1v7//y8AAADe/v//LgAAAOb+//8tAAAA7v7//ywAAAD2/v//KwAAAP7+//8pAAAABv///ygAAAAO////JwAAABb///8mAAAAHv///yUAAAAm////JAAAAC7///8jAAAANv///yIAAAA+////IQAAAEb///8fAAAATv///x0AAABW////HAAAAF7///8bAAAAZv///xoAAABu////GQAAAHb///8YAAAAfv///xcAAACG////FgAAAI7///8VAAAAlv///xQAAACe////EwAAAKb///8SAAAArv///xEAAAC2////EAAAAL7///8OAAAAxv///wwAAADO////CwAAANb///8KAAAA3v///wgAAADm////BwAAAO7///8GAAAA3v///wUAAAAAAAYACAAEAAYAAAAEAAAA9v///wMAAAAAAAYACgAEAAYAAAABAAAAAAAOADAAJAAYAAwACAAEAA4AAAAAAMB/AADAf9fy+r5Mgas+rgFOP6pXx0f8dh3H800Dx0cIJkg3cKnHGsbTRg=="
-            }
+            },
+            type: 1,
           }
         },
         {
@@ -346,8 +349,9 @@ export default {
                 "y": -40310.984375,
                 "z": -33613.94921875
               },
-              "flatBuffer": "EAAAAAwAFAAQAAwACAAEAAwAAAAAAAAADAAAACQAAADUBgAABgAAAIQCAABoAgAAWAIAADwCAAAsAgAAEAIAAIIAAACYBgAAhAYAAHgGAABkBgAAWAYAAEwGAABABgAANAYAACgGAAAcBgAAEAYAAAQGAAD4BQAA7AUAAOAFAADUBQAAyAUAALwFAACwBQAApAUAAJgFAACMBQAAgAUAAHQFAABoBQAAXAUAAFAFAABEBQAAOAUAACwFAAAgBQAAFAUAAAgFAAD8BAAA8AQAAOQEAADYBAAAzAQAAMAEAAC0BAAAqAQAAJwEAACQBAAAhAQAAHgEAABsBAAAYAQAAFQEAABIBAAAPAQAADAEAAAkBAAAGAQAAAwEAAAABAAA9AMAAOgDAADcAwAA0AMAAMQDAAC4AwAArAMAAKADAACUAwAAiAMAAHwDAABwAwAAZAMAAFgDAABMAwAAQAMAADQDAAAoAwAAHAMAABADAAAEAwAA+AIAAOwCAADgAgAA1AIAAMgCAAC8AgAAsAIAAKQCAACYAgAAjAIAAIACAAB0AgAAaAIAAFgCAABEAgAAOAIAACwCAAAgAgAAFAIAAAgCAAD8AQAA8AEAAOQBAADYAQAAzAEAAMABAAC0AQAAqAEAAJwBAACQAQAAhAEAAHgBAABsAQAAYAEAAFQBAABIAQAAPAEAADABAAAkAQAAGAEAAAwBAAAAAQAA9AAAAOgAAADcAAAA0AAAAMQAAAC4AAAArAAAAKAAAACUAAAAiAAAAHwAAABwAAAA9P///37RVUcAAIC/DAAMAAAAAAAIAAQADAAAAAAAFkUAAIA/9P///zCJ0kgAAIC/DAAMAAAACAAAAAQADAAAAO8hz0gAAIA/9P///57P7UgAAIC/DAAMAAgAAAAAAAQADAAAAO9ln0gAAIA/+vv//54AAAAC/P//mgAAAAr8//+ZAAAAEvz//5gAAAAa/P//lgAAACL8//+VAAAAKvz//5QAAAAy/P//kwAAADr8//+SAAAAQvz//5EAAABK/P//kAAAAFL8//+PAAAAWvz//44AAABi/P//jAAAAGr8//+LAAAAcvz//4oAAAB6/P//iQAAAIL8//+IAAAAivz//4cAAACS/P//hgAAAJr8//+FAAAAovz//4QAAACq/P//gwAAALL8//+CAAAAuvz//4AAAADC/P//fwAAAMr8//9+AAAA0vz//30AAADa/P//fAAAAOL8//97AAAA6vz//3cAAADy/P//dgAAAPr8//91AAAAAv3//3QAAAAK/f//cwAAABL9//9yAAAAGv3//3EAAAAi/f//cAAAACr9//9vAAAAMv3//2wAAAAIAAwACAAHAAgAAAAAAAABawAAAE79//9qAAAAVv3//2kAAABe/f//aAAAAGb9//9nAAAAbv3//2UAAAB2/f//ZAAAAH79//9jAAAAhv3//2IAAACO/f//YAAAAJb9//9fAAAAnv3//14AAACm/f//XQAAAK79//9cAAAAtv3//1sAAAC+/f//WgAAAMb9//9ZAAAAzv3//1gAAADW/f//VwAAAN79//9WAAAA5v3//1UAAADu/f//VAAAAPb9//9TAAAA/v3//1EAAAAG/v//UAAAAA7+//9PAAAAFv7//04AAAAe/v//TQAAACb+//9LAAAALv7//0oAAAA2/v//SQAAAD7+//9GAAAARv7//0QAAABO/v//QwAAAFb+//9CAAAAXv7//0EAAABm/v//QAAAAG7+//8/AAAAdv7//z4AAAB+/v//PQAAAIb+//88AAAAjv7//zoAAACW/v//OAAAAJ7+//83AAAApv7//zYAAACu/v//NQAAALb+//80AAAAvv7//zMAAADG/v//MgAAAM7+//8wAAAA1v7//y8AAADe/v//LgAAAOb+//8tAAAA7v7//ywAAAD2/v//KwAAAP7+//8pAAAABv///ygAAAAO////JwAAABb///8mAAAAHv///yUAAAAm////JAAAAC7///8jAAAANv///yIAAAA+////IQAAAEb///8fAAAATv///x0AAABW////HAAAAF7///8bAAAAZv///xoAAABu////GQAAAHb///8YAAAAfv///xcAAACG////FgAAAI7///8VAAAAlv///xQAAACe////EwAAAKb///8SAAAArv///xEAAAC2////EAAAAL7///8OAAAAxv///wwAAADO////CwAAANb///8KAAAA3v///wgAAADm////BwAAAO7///8GAAAA3v///wUAAAAAAAYACAAEAAYAAAAEAAAA9v///wMAAAAAAAYACgAEAAYAAAABAAAAAAAOADAAJAAYAAwACAAEAA4AAAAAAMB/AADAf9fy+r5Mgas+rgFOP6pXx0f8dh3H800Dx0cIJkg3cKnHGsbTRg=="
-            }
+              "flatBuffer":"EAAAAAwAFAAQAAwACAAEAAwAAAAAAAAADAAAACQAAADUBgAABgAAAIQCAABoAgAAWAIAADwCAAAsAgAAEAIAAIIAAACYBgAAhAYAAHgGAABkBgAAWAYAAEwGAABABgAANAYAACgGAAAcBgAAEAYAAAQGAAD4BQAA7AUAAOAFAADUBQAAyAUAALwFAACwBQAApAUAAJgFAACMBQAAgAUAAHQFAABoBQAAXAUAAFAFAABEBQAAOAUAACwFAAAgBQAAFAUAAAgFAAD8BAAA8AQAAOQEAADYBAAAzAQAAMAEAAC0BAAAqAQAAJwEAACQBAAAhAQAAHgEAABsBAAAYAQAAFQEAABIBAAAPAQAADAEAAAkBAAAGAQAAAwEAAAABAAA9AMAAOgDAADcAwAA0AMAAMQDAAC4AwAArAMAAKADAACUAwAAiAMAAHwDAABwAwAAZAMAAFgDAABMAwAAQAMAADQDAAAoAwAAHAMAABADAAAEAwAA+AIAAOwCAADgAgAA1AIAAMgCAAC8AgAAsAIAAKQCAACYAgAAjAIAAIACAAB0AgAAaAIAAFgCAABEAgAAOAIAACwCAAAgAgAAFAIAAAgCAAD8AQAA8AEAAOQBAADYAQAAzAEAAMABAAC0AQAAqAEAAJwBAACQAQAAhAEAAHgBAABsAQAAYAEAAFQBAABIAQAAPAEAADABAAAkAQAAGAEAAAwBAAAAAQAA9AAAAOgAAADcAAAA0AAAAMQAAAC4AAAArAAAAKAAAACUAAAAiAAAAHwAAABwAAAA9P///37RVUcAAIC/DAAMAAAAAAAIAAQADAAAAAAAFkUAAIA/9P///zCJ0kgAAIC/DAAMAAAACAAAAAQADAAAAO8hz0gAAIA/9P///57P7UgAAIC/DAAMAAgAAAAAAAQADAAAAO9ln0gAAIA/+vv//54AAAAC/P//mgAAAAr8//+ZAAAAEvz//5gAAAAa/P//lgAAACL8//+VAAAAKvz//5QAAAAy/P//kwAAADr8//+SAAAAQvz//5EAAABK/P//kAAAAFL8//+PAAAAWvz//44AAABi/P//jAAAAGr8//+LAAAAcvz//4oAAAB6/P//iQAAAIL8//+IAAAAivz//4cAAACS/P//hgAAAJr8//+FAAAAovz//4QAAACq/P//gwAAALL8//+CAAAAuvz//4AAAADC/P//fwAAAMr8//9+AAAA0vz//30AAADa/P//fAAAAOL8//97AAAA6vz//3cAAADy/P//dgAAAPr8//91AAAAAv3//3QAAAAK/f//cwAAABL9//9yAAAAGv3//3EAAAAi/f//cAAAACr9//9vAAAAMv3//2wAAAAIAAwACAAHAAgAAAAAAAABawAAAE79//9qAAAAVv3//2kAAABe/f//aAAAAGb9//9nAAAAbv3//2UAAAB2/f//ZAAAAH79//9jAAAAhv3//2IAAACO/f//YAAAAJb9//9fAAAAnv3//14AAACm/f//XQAAAK79//9cAAAAtv3//1sAAAC+/f//WgAAAMb9//9ZAAAAzv3//1gAAADW/f//VwAAAN79//9WAAAA5v3//1UAAADu/f//VAAAAPb9//9TAAAA/v3//1EAAAAG/v//UAAAAA7+//9PAAAAFv7//04AAAAe/v//TQAAACb+//9LAAAALv7//0oAAAA2/v//SQAAAD7+//9GAAAARv7//0QAAABO/v//QwAAAFb+//9CAAAAXv7//0EAAABm/v//QAAAAG7+//8/AAAAdv7//z4AAAB+/v//PQAAAIb+//88AAAAjv7//zoAAACW/v//OAAAAJ7+//83AAAApv7//zYAAACu/v//NQAAALb+//80AAAAvv7//zMAAADG/v//MgAAAM7+//8wAAAA1v7//y8AAADe/v//LgAAAOb+//8tAAAA7v7//ywAAAD2/v//KwAAAP7+//8pAAAABv///ygAAAAO////JwAAABb///8mAAAAHv///yUAAAAm////JAAAAC7///8jAAAANv///yIAAAA+////IQAAAEb///8fAAAATv///x0AAABW////HAAAAF7///8bAAAAZv///xoAAABu////GQAAAHb///8YAAAAfv///xcAAACG////FgAAAI7///8VAAAAlv///xQAAACe////EwAAAKb///8SAAAArv///xEAAAC2////EAAAAL7///8OAAAAxv///wwAAADO////CwAAANb///8KAAAA3v///wgAAADm////BwAAAO7///8GAAAA3v///wUAAAAAAAYACAAEAAYAAAAEAAAA9v///wMAAAAAAAYACgAEAAYAAAABAAAAAAAOADAAJAAYAAwACAAEAA4AAAAAAMB/AADAfzMsxb0SCt2+XphlP2x1/0doUSLI68zbxk06E0hwxJXHGqaFRg=="
+            },
+            type:1
           }
         },
         {
@@ -412,7 +416,8 @@ export default {
         preload: 'auto',
       },
       videoShow: false,
-      popInfo:false,
+      popInfo: false,
+      type: 0,
     }
   },
   mixins: [model],
@@ -433,20 +438,21 @@ export default {
         return {
           ...o,
           clickPointCallback: (r) => {
+            this.type = r?.data?.type === 1 ? 1 : 0;
             this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
                 r.data.selectedEntity.floorID,
                 r.data.selectedEntity.handle,
                 r.data.selectedEntity.floorName,
                 r.data.selectedEntity.flatBuffer
             );
-            this.playerOptions.sources[0].src = require("@/assets/视频1-迅捷压缩.mp4");
+            this.playerOptions.sources[0].src = this.type === 1 ? require("@/assets/视频1-迅捷压缩.mp4") : require("@/assets/4-迅捷压缩.mp4");
             this.videoShow = true;
             this.popInfo = true;
           }
         }
       });
       this.$store.state.modelVueInstance.viewRender.interfaceApi.setMarkPointList(arr);
-      if (this.$store.state.initDeviceData?.floorID){
+      if (this.$store.state.initDeviceData?.floorID) {
         this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
             this.$store.state.initDeviceData.floorID,
             this.$store.state.initDeviceData.handle,
@@ -456,7 +462,7 @@ export default {
         this.playerOptions.sources[0].src = this.$store.state.initDeviceData.src;
         this.videoShow = true;
         this.popInfo = true;
-        this.$store.commit("setInitDeviceData",undefined)
+        this.$store.commit("setInitDeviceData", undefined)
       }
     },
     menuClick(type) {
@@ -471,28 +477,28 @@ export default {
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = false;
-          this.yunWeiShow =false;
+          this.yunWeiShow = false;
           break;
         case 2:
           this.buttonOneClicked = false;
           this.ziChanShow = !this.ziChanShow;
           this.tongJiShow = false;
           this.xiTongShow = false;
-          this.yunWeiShow =false;
+          this.yunWeiShow = false;
           break;
         case 3:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = !this.tongJiShow;
           this.xiTongShow = false;
-          this.yunWeiShow =false;
+          this.yunWeiShow = false;
           break;
         case 4:
           this.buttonOneClicked = false;
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = !this.xiTongShow;
-          this.yunWeiShow =false;
+          this.yunWeiShow = false;
           break;
         case 5:
           this.buttonOneClicked = false;
@@ -506,11 +512,11 @@ export default {
           this.ziChanShow = false;
           this.tongJiShow = false;
           this.xiTongShow = false;
-          this.yunWeiShow =false;
+          this.yunWeiShow = false;
           break;
       }
     },
-
+    
     clickVideo(r) {
       this.$store.state.modelVueInstance.viewRender.interfaceApi.setModelViewInfo(
           r.floorID,
@@ -531,13 +537,13 @@ export default {
   right: 0;
   left: 0;
   bottom: 0;
+  
   .pop_info {
     position: absolute;
     top: 300px;
     left: 1332px;
     width: 384px;
     height: 257px;
-    background: url("~@/assets/摄像头1.png");
     z-index: 1;
     
     .close {
@@ -548,6 +554,15 @@ export default {
       right: 10px;
     }
   }
+  
+  .pop_info1 {
+    background: url("~@/assets/摄像头1.png");
+  }
+  
+  .pop_info2 {
+    background: url("~@/assets/摄像头2.png");
+  }
+  
   img {
     -webkit-user-drag: none;
   }
@@ -572,6 +587,7 @@ export default {
         
         .video_item {
           height: 30px;
+          cursor: pointer;
         }
       }
     }

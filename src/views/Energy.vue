@@ -4,15 +4,15 @@
       <img src="@/assets/nav bar-能耗统计.png" alt="" >
       <div class="click_home" @click="menuClick(0)"></div>
       <div class="click_div" @click="menuClick(1)"></div>
-      <monitor-panel v-if="buttonOneClicked"></monitor-panel>
+      <monitor-panel v-show="buttonOneClicked"></monitor-panel>
       <div class = "yun_wei" @click = "menuClick(5)" ></div >
       <maintenance-panel v-show = "yunWeiShow" ></maintenance-panel >
       <div class = "zi_chan" @click = "menuClick(2)" ></div >
-      <assets-panel v-if = "ziChanShow"></assets-panel>
+      <assets-panel v-show = "ziChanShow"></assets-panel>
       <div class="tong_ji" @click="menuClick(3)"></div>
-      <energy-panel v-if="tongJiShow"></energy-panel>
+      <energy-panel v-show="tongJiShow"></energy-panel>
       <div class="xi_tong" @click="menuClick(4)"></div>
-      <system-panel v-if="xiTongShow"></system-panel>
+      <system-panel v-show="xiTongShow"></system-panel>
     </div>
     <div class="contain">
       <img src="@/assets/统计分析.png" alt="">

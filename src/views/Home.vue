@@ -4,15 +4,15 @@
       <img src = "@/assets/nav bar-首页.png" alt = "" >
       <div class = "click_home" @click = "menuClick(0)" ></div >
       <div class = "click_div" @click = "menuClick(1)" ></div >
-      <monitor-panel v-if = "buttonOneClicked" ></monitor-panel >
+      <monitor-panel v-show = "buttonOneClicked" ></monitor-panel >
       <div class = "yun_wei" @click = "menuClick(5)" ></div >
       <maintenance-panel v-show = "yunWeiShow" ></maintenance-panel >
       <div class = "zi_chan" @click = "menuClick(2)" ></div >
-      <assets-panel v-if = "ziChanShow" ></assets-panel >
+      <assets-panel v-show = "ziChanShow" ></assets-panel >
       <div class = "tong_ji" @click = "menuClick(3)" ></div >
-      <energy-panel v-if = "tongJiShow" ></energy-panel >
+      <energy-panel v-show = "tongJiShow" ></energy-panel >
       <div class = "xi_tong" @click = "menuClick(4)" ></div >
-      <system-panel v-if = "xiTongShow" ></system-panel >
+      <system-panel v-show = "xiTongShow" ></system-panel >
     </div >
     <div class = "contain" >
       <img class = "zi_xi_tong" src = "@/assets/子系统.png" alt = "" >
@@ -26,7 +26,7 @@
             <div class = "header" @click="showDetail(o)"></div >
             <video-player class = "video-player-box"
                           ref = "videoPlayer"
-                          :options = "getVideoOption(o)"
+                          :options = "index===0?playerOptions1:playerOptions2"
                           :playsinline = "true" >
             </video-player >
           </div >
@@ -68,7 +68,7 @@ export default {
       yunWeiShow: false,
       xiTongShow: false,
       popInfo: false,
-      playerOptions: {
+      playerOptions1: {
         // videojs options
         autoplay: 'muted',
         muted: true,
@@ -76,7 +76,27 @@ export default {
         sources: [{
           withCredentials: false,
           type: "video/mp4",
-          src:""
+          src: require("@/assets/视频1-迅捷压缩.mp4")
+        }],
+        controlBar: {
+          timeDivider: false,
+          durationDisplay: false,
+          remainingTimeDisplay: false,//
+        },
+        loop: true,
+        width: 341,
+        height: 150,
+        preload: 'auto',
+      },
+      playerOptions2: {
+        // videojs options
+        autoplay: 'muted',
+        muted: true,
+        language: 'zh-CN',
+        sources: [{
+          withCredentials: false,
+          type: "video/mp4",
+          src: require("@/assets/4-迅捷压缩.mp4")
         }],
         controlBar: {
           timeDivider: false,
@@ -225,6 +245,7 @@ export default {
   mounted() {
     this.$store.commit("setModelShow", true);
     this.$root.$on("selectedEntity", data => {
+      console.log(data)
       let showPopList = [
         {
           floorID: 31,
@@ -239,7 +260,7 @@ export default {
           handle: "630641",
         }
       ]
-      showPopList.some(o => o.floorID === data?.object?.floorID && data?.object?.handle) && (this.popInfo = true);
+      showPopList.some(o => o.floorID === data?.object?.floorID && o.handle ===data?.object?.handle) && (this.popInfo = true);
     });
   },
   methods: {
@@ -293,11 +314,6 @@ export default {
           this.yunWeiShow = false;
           break;
       }
-    },
-    getVideoOption(o){
-      let option = JSON.parse(JSON.stringify(this.playerOptions));
-      option.sources[0].src = o.src;
-      return option;
     },
     showDetail(o){
       this.$store.commit("setInitDeviceData",o);
@@ -398,6 +414,7 @@ export default {
           .header {
             width: 100%;
             height: 21px;
+            cursor: pointer;
           }
     
         }
@@ -419,6 +436,7 @@ export default {
         top: 428px;
         .door{
           height: 35px;
+          cursor: pointer;
         }
       }
     }

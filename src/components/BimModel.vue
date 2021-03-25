@@ -72,6 +72,7 @@ export default {
     // 执行run加载
     this.viewRender.run(runOptions);
     this.viewRender.addEventListener('selectedEntity', (data) => {
+      console.log(data)
       this.$root.$emit("selectedEntity", data)
       /* if (data.object.handle && data.objectw.clickPointPosition?.x && data.object.clickPointPosition?.y &&data.object.clickPointPosition?.z){
          let pointData = {
