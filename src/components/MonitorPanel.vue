@@ -69,7 +69,8 @@ export default {
         },
         {
           name: "建筑能效监管系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 31.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 31.png"),
+          router:"Building"
         },
         {
           name: "入侵报警系统",
