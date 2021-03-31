@@ -413,11 +413,15 @@ export default {
       .videos {
         position: absolute;
         height: 332px;
-        width: 341px;
         top: 220px;
         left: 17px;
         
         .video-player-box {
+         /deep/ video{
+           width: 341px!important;
+           height: 150px!important;
+           object-fit:fill;
+         }
           /deep/ .video-js {
             .vjs-control-bar {
               display: flex;
