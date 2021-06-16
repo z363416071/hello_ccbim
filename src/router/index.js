@@ -94,6 +94,16 @@ const routes = [
     name: 'Building',
     component: () => import(/* webpackChunkName: "about" */ '../views/Building.vue')
   },
+  {
+    path: '/computer-room',
+    name: 'ComputerRoom',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ComputerRoom.vue')
+  },
+  {
+    path: '/broadcast',
+    name: 'Broadcast',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Broadcast.vue')
+  },
 ]
 
 const router = new VueRouter({

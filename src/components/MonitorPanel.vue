@@ -48,7 +48,8 @@ export default {
         },
         {
           name: "公共广播系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 26.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 26.png"),
+          router: "Broadcast"
         },
         {
           name: "多媒体会议系统",
@@ -100,7 +101,8 @@ export default {
         },
         {
           name: "机房系统工程",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 37.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 37.png"),
+          router: "ComputerRoom"
         },
       ]
     }
