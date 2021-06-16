@@ -18,7 +18,6 @@ export default {
         {
           name: "多媒体教学系统",
           icon: require("@/assets/monitor_panel/icon／20／关闭摄像.png"),
-          router: "Computer"
         },
         {
           name: "校园智能卡应用系统",
@@ -44,7 +43,9 @@ export default {
         },
         {
           name: "信息网络系统",
-          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 25.png")
+          icon: require("@/assets/monitor_panel/icon／20／关闭摄像备份 25.png"),
+          router: "Computer"
+
         },
         {
           name: "公共广播系统",

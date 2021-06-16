@@ -459,8 +459,11 @@ export default {
             this.$store.state.initDeviceData.floorName,
             this.$store.state.initDeviceData.flatBuffer
         );
-        this.playerOptions.sources[0].src = this.$store.state.initDeviceData.src;
-        this.videoShow = true;
+        if(this.$store.state.initDeviceData.src){
+          this.playerOptions.sources[0].src = this.$store.state.initDeviceData.src;
+          this.videoShow = true;
+        }
+
         this.popInfo = true;
         this.$store.commit("setInitDeviceData", undefined)
       }
