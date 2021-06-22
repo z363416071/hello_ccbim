@@ -229,7 +229,6 @@ export default {
   mounted() {
     this.$store.commit("setModelShow",true);
     this.$root.$on("selectedEntity",(data)=>{
-      console.log(data)
       if (data.object.handle==="426231" && data.object.floorID===63){
         this.$notify.success("打开体育馆大门")
       }
