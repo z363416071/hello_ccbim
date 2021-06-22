@@ -229,8 +229,9 @@ export default {
   mounted() {
     this.$store.commit("setModelShow",true);
     this.$root.$on("selectedEntity",(data)=>{
+      console.log(data)
       if (data.object.handle==="426231" && data.object.floorID===63){
-        this.$notify.success("打开图书馆3楼过道北门")
+        this.$notify.success("打开体育馆大门")
       }
       if (data.object.handle==="1025378" && data.object.floorID===37){
         this.$notify.success("已经申请保修")
